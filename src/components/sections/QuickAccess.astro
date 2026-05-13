@@ -1,0 +1,67 @@
+---
+const cards = [
+  {
+    icon: '🩺',
+    title: 'Buat Janji Temu',
+    sub: 'Pilih dokter & jadwal online, konfirmasi dalam 1 jam kerja',
+    href: '#booking',
+    accent: true,
+  },
+  {
+    icon: '🚑',
+    title: 'Emergency IGD 24/7',
+    sub: 'Hubungi (021) 555-1888 — tim siap setiap saat',
+    href: 'tel:+62215551888',
+    accent: true,
+  },
+  {
+    icon: '🏥',
+    title: 'Medical Check-Up',
+    sub: 'Paket sehat preventif mulai Rp 850.000',
+    href: '#mcu',
+    accent: false,
+  },
+  {
+    icon: '📞',
+    title: 'Customer Care',
+    sub: 'WhatsApp 24/7 — pertanyaan & jadwal',
+    href: 'https://wa.me/6281234567890',
+    accent: false,
+  },
+] as const;
+---
+<section class="section">
+  <div class="container">
+    <div class="grid">
+      {cards.map((c) => (
+        <a href={c.href} class:list={['card card-hover reveal', c.accent && 'accent']}>
+          <div class="icon">{c.icon}</div>
+          <div class="title">{c.title}</div>
+          <div class="sub">{c.sub}</div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .card {
+    background: var(--color-canvas);
+    border: 1px solid var(--color-hairline-soft);
+    border-radius: var(--radius-md);
+    padding: 28px 22px;
+    display: block;
+  }
+  .card.accent { background: var(--color-primary-muted); border-color: #ffc8d4; }
+  .icon  { font-size: 32px; margin-bottom: 14px; }
+  .title { font-size: 16px; font-weight: 600; color: var(--color-ink); margin-bottom: 6px; }
+  .sub   { font-size: 14px; color: var(--color-muted); line-height: 1.5; }
+
+  @media (max-width: 768px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .grid { grid-template-columns: 1fr; } }
+</style>

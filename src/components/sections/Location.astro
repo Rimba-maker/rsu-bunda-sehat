@@ -1,0 +1,107 @@
+---
+const hours = [
+  { name: '🚑 IGD',        time: '24 jam / 7 hari' },
+  { name: '👨‍⚕️ Poliklinik', time: 'Sn–Sb 07.00–21.00 · Mg 08.00–15.00' },
+  { name: '💊 Apotek',      time: '24 jam / 7 hari' },
+  { name: '🔬 Lab',         time: '24 jam / 7 hari' },
+] as const;
+---
+<section class="section-alt" id="kontak">
+  <div class="container">
+    <h2 class="section-title reveal">Lokasi &amp; Kontak</h2>
+    <p class="section-sub reveal">Kami berada di jantung Jakarta Timur, mudah dijangkau dari berbagai arah.</p>
+
+    <div class="grid">
+      <!-- Info column -->
+      <div>
+        <div class="group reveal">
+          <div class="label">Alamat</div>
+          <p class="item">📍 Jl. Bunda Sehat No. 88, Jakarta Timur 13420</p>
+        </div>
+
+        <div class="group reveal">
+          <div class="label">Hotline 24/7</div>
+          <p class="item">🚑 Emergency IGD: 119 atau (021) 555-1888</p>
+          <p class="item">📞 Informasi: (021) 555-1999</p>
+          <p class="item">💬 WhatsApp: 0812-3456-7890</p>
+        </div>
+
+        <div class="group reveal">
+          <div class="label">Jam Operasional</div>
+          <div class="hours-grid">
+            {hours.map((h) => (
+              <div class="hour-card">
+                <div class="hour-name">{h.name}</div>
+                <div class="hour-time">{h.time}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="group reveal">
+          <div class="label">Parkir</div>
+          <p class="item">🚗 500 mobil + 200 motor · Gratis 2 jam pertama</p>
+        </div>
+      </div>
+
+      <!-- Map placeholder -->
+      <div class="map-box reveal">
+        <span class="map-icon">🗺️</span>
+        <strong>Jl. Bunda Sehat No. 88</strong>
+        <span>Jakarta Timur — 5 menit dari Tol Dalam Kota</span>
+        <a href="https://maps.google.com" target="_blank" rel="noopener" class="btn-primary">
+          Buka di Google Maps
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+  .group { margin-bottom: 24px; }
+  .label {
+    font-size: 11px; font-weight: 700;
+    color: var(--color-muted);
+    text-transform: uppercase; letter-spacing: .06em;
+    margin-bottom: 8px;
+  }
+  .item { font-size: 14px; color: var(--color-body-text); margin-bottom: 4px; }
+
+  .hours-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .hour-card {
+    background: var(--color-canvas);
+    border: 1px solid var(--color-hairline-soft);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+  }
+  .hour-name { font-size: 12px; font-weight: 600; color: var(--color-ink); margin-bottom: 2px; }
+  .hour-time { font-size: 13px; color: var(--color-muted); }
+
+  .map-box {
+    background: var(--color-surface-mid);
+    border: 1px solid var(--color-hairline-soft);
+    border-radius: var(--radius-md);
+    min-height: 300px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 10px;
+    padding: 32px;
+    text-align: center;
+    color: var(--color-muted);
+    font-size: 14px;
+  }
+  .map-icon { font-size: 48px; }
+  .map-box strong { font-size: 16px; font-weight: 600; color: var(--color-ink); }
+
+  @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+</style>

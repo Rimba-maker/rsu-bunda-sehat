@@ -1,0 +1,143 @@
+---
+---
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <!-- Brand -->
+      <div>
+        <div class="brand-row">
+          <div class="logo-mark">BS</div>
+          <div>
+            <div class="logo-name">RSU Bunda Sehat</div>
+            <div class="logo-sub">Rumah Sakit Umum Tipe B</div>
+          </div>
+        </div>
+        <p class="tagline">Merawat Indonesia, Generasi ke Generasi.</p>
+        <div class="accreds">
+          <span class="accred">KARS Paripurna 2024</span>
+          <span class="accred">ISO 9001:2015</span>
+          <span class="accred">ISO 14001</span>
+          <span class="accred">Kemenkes RI</span>
+          <span class="accred">Pemda DKI</span>
+        </div>
+      </div>
+
+      <!-- Layanan -->
+      <div>
+        <div class="col-title">Layanan</div>
+        <nav class="foot-links">
+          <a href="#layanan">Rawat Jalan</a>
+          <a href="#layanan">Rawat Inap</a>
+          <a href="#layanan">IGD 24/7</a>
+          <a href="#layanan">Maternal & Anak</a>
+          <a href="#layanan">Cardiac Center</a>
+          <a href="#mcu">Medical Check-Up</a>
+        </nav>
+      </div>
+
+      <!-- Informasi -->
+      <div>
+        <div class="col-title">Informasi</div>
+        <nav class="foot-links">
+          <a href="#dokter">Tim Dokter</a>
+          <a href="#fasilitas">Fasilitas</a>
+          <a href="#asuransi">BPJS & Asuransi</a>
+          <a href="#">Karir</a>
+          <a href="#">Pengaduan Pasien</a>
+          <a href="#">Donasi & CSR</a>
+        </nav>
+      </div>
+
+      <!-- Kontak -->
+      <div>
+        <div class="col-title">Hubungi Kami</div>
+        <nav class="foot-links">
+          <a href="tel:+62215551888">🚑 IGD: (021) 555-1888</a>
+          <a href="tel:+62215551999">📞 Info: (021) 555-1999</a>
+          <a href="https://wa.me/6281234567890">💬 WhatsApp</a>
+          <a href="#">📧 Email kami</a>
+        </nav>
+        <p class="address">Jl. Bunda Sehat No. 88<br />Jakarta Timur 13420</p>
+      </div>
+    </div>
+
+    <!-- Legal band -->
+    <div class="legal-band">
+      <p class="legal-text">
+        © 2025 RSU Bunda Sehat. Semua hak dilindungi. ·
+        <a href="#">Kebijakan Privasi</a> ·
+        <a href="#">Syarat & Ketentuan</a>
+      </p>
+      <div class="socials">
+        <a href="#" class="social" title="Instagram @rsubundasehat">📸</a>
+        <a href="#" class="social" title="Facebook">👤</a>
+        <a href="#" class="social" title="YouTube">▶️</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--color-canvas);
+    border-top: 1px solid var(--color-hairline-soft);
+    padding-top: 48px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+  .brand-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .logo-mark {
+    width: 36px; height: 36px;
+    background: var(--color-primary);
+    border-radius: var(--radius-sm);
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-weight: 700; font-size: 13px;
+    flex-shrink: 0;
+  }
+  .logo-name { font-size: 14px; font-weight: 700; }
+  .logo-sub  { font-size: 11px; color: var(--color-muted); }
+  .tagline { font-size: 14px; color: var(--color-muted); line-height: 1.6; margin-bottom: 14px; max-width: 220px; }
+  .accreds { display: flex; flex-wrap: wrap; gap: 6px; }
+  .accred {
+    background: var(--color-surface-soft);
+    border: 1px solid var(--color-hairline-soft);
+    border-radius: var(--radius-xs);
+    padding: 3px 8px;
+    font-size: 11px; font-weight: 600; color: var(--color-muted);
+  }
+  .col-title { font-size: 13px; font-weight: 600; color: var(--color-ink); margin-bottom: 14px; }
+  .foot-links { display: flex; flex-direction: column; gap: 8px; }
+  .foot-links a { font-size: 14px; color: var(--color-muted); transition: color .15s; }
+  .foot-links a:hover { color: var(--color-ink); }
+  .address { font-size: 13px; color: var(--color-muted); margin-top: 14px; line-height: 1.6; }
+
+  .legal-band {
+    border-top: 1px solid var(--color-hairline-soft);
+    padding: 18px 0;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 10px;
+  }
+  .legal-text { font-size: 12px; color: var(--color-muted-soft); }
+  .legal-text a { color: inherit; text-decoration: underline; }
+  .socials { display: flex; gap: 10px; }
+  .social {
+    width: 32px; height: 32px;
+    background: var(--color-surface-soft);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    transition: background .15s;
+  }
+  .social:hover { background: var(--color-surface-mid); }
+
+  @media (max-width: 768px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 480px) {
+    .footer-grid { grid-template-columns: 1fr; }
+  }
+</style>

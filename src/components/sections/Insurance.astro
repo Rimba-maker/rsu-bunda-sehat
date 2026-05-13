@@ -1,0 +1,65 @@
+---
+import { partners, paymentMethods } from '../../data/insurance';
+---
+<section class="section-alt" id="asuransi">
+  <div class="container">
+    <h2 class="section-title reveal">Kami Bekerjasama Dengan</h2>
+    <p class="section-sub reveal">BPJS Kesehatan + 20+ asuransi swasta untuk kemudahan Anda.</p>
+
+    <div class="logo-grid">
+      {partners.map((p) => (
+        <div class:list={['logo-tile reveal', p.featured && 'featured']}>
+          {p.name}
+        </div>
+      ))}
+    </div>
+
+    <div class="pay-row reveal">
+      {paymentMethods.map((m) => (
+        <span class="pay-badge">{m}</span>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .logo-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .logo-tile {
+    background: var(--color-canvas);
+    border: 1px solid var(--color-hairline-soft);
+    border-radius: var(--radius-sm);
+    height: 58px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 600; color: var(--color-muted);
+    padding: 0 10px; text-align: center;
+    transition: border-color .15s;
+  }
+  .logo-tile:hover { border-color: var(--color-hairline); }
+  .logo-tile.featured {
+    background: var(--color-primary-muted);
+    border-color: #ffc8d4;
+    color: var(--color-primary);
+    font-weight: 700;
+    grid-column: span 2;
+    font-size: 14px;
+  }
+
+  .pay-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .pay-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--color-canvas);
+    border: 1px solid var(--color-hairline-soft);
+    border-radius: var(--radius-sm);
+    padding: 8px 14px;
+    font-size: 13px; color: var(--color-body-text);
+  }
+
+  @media (max-width: 1024px) { .logo-grid { grid-template-columns: repeat(4, 1fr); } }
+  @media (max-width: 768px)  { .logo-grid { grid-template-columns: repeat(3, 1fr); } .logo-tile.featured { grid-column: span 1; } }
+  @media (max-width: 480px)  { .logo-grid { grid-template-columns: repeat(2, 1fr); } }
+</style>

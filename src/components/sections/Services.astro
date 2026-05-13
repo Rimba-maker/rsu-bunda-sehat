@@ -1,0 +1,54 @@
+---
+import { services } from '../../data/services';
+---
+<section class="section-alt" id="layanan">
+  <div class="container">
+    <h2 class="section-title reveal">Layanan Medis Kami</h2>
+    <p class="section-sub reveal">Pelayanan lengkap untuk segala usia, dari preventif sampai tindakan kompleks.</p>
+
+    <div class="grid">
+      {services.map((s) => (
+        <div class="card card-hover reveal">
+          <div
+            class="photo"
+            style={`background-image: url('${s.photo}')`}
+            role="img"
+            aria-label={s.name}
+          ></div>
+          <div class="body">
+            <div class="icon">{s.icon}</div>
+            <div class="name">{s.name}</div>
+            <div class="meta">{s.meta}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .card {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--color-canvas);
+    border: 1px solid var(--color-hairline-soft);
+  }
+  .photo {
+    width: 100%; aspect-ratio: 4/3;
+    background-size: cover; background-position: center;
+    background-color: var(--color-surface-mid);
+  }
+  .body   { padding: 16px; }
+  .icon   { font-size: 22px; margin-bottom: 8px; }
+  .name   { font-size: 15px; font-weight: 600; color: var(--color-ink); margin-bottom: 5px; }
+  .meta   { font-size: 13px; color: var(--color-muted); line-height: 1.5; }
+
+  @media (max-width: 1024px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 768px)  { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px)  { .grid { grid-template-columns: 1fr; } }
+</style>

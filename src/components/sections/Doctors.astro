@@ -1,0 +1,109 @@
+---
+import { doctors, specializations } from '../../data/doctors';
+---
+<section class="section" id="dokter">
+  <div class="container">
+    <h2 class="section-title reveal">Tim Dokter Spesialis</h2>
+    <p class="section-sub reveal">80+ dokter spesialis bersertifikat siap melayani Anda.</p>
+
+    <!-- Filter chips -->
+    <div class="filter-strip reveal" id="filterStrip">
+      {specializations.map((s) => (
+        <button
+          class:list={['filter-chip', s.id === 'all' && 'active']}
+          data-spec={s.id}
+        >
+          {s.label}
+        </button>
+      ))}
+    </div>
+
+    <!-- Doctor grid -->
+    <div class="grid" id="doctorGrid">
+      {doctors.map((d) => (
+        <div class="card card-hover reveal" data-spec={d.specId}>
+          <div
+            class="photo"
+            style={`background-image: url('${d.photo}')`}
+            role="img"
+            aria-label={`Foto ${d.name}`}
+          >
+            <span class="badge">{d.badge}</span>
+          </div>
+          <div class="body">
+            <div class="top">
+              <div class="name">{d.name}</div>
+              <div class="spec">{d.spec}</div>
+            </div>
+            <div class="bottom">
+              <div class="schedule">⏰ {d.schedule}</div>
+              <a href="#booking" class="btn-book">Buat Janji</a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .filter-strip { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .card {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--color-canvas);
+    border: 1px solid var(--color-hairline-soft);
+    display: flex;
+    flex-direction: column;
+  }
+  .photo {
+    width: 100%; aspect-ratio: 3/4;
+    background-size: cover; background-position: center top;
+    background-color: var(--color-surface-mid);
+    position: relative;
+  }
+  /* Airbnb guest-favorite-badge pattern */
+  .badge {
+    position: absolute; top: 10px; left: 10px;
+    background: #fff;
+    color: var(--color-ink);
+    font-size: 10px; font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 9999px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.14);
+  }
+  .body     { padding: 14px 16px 16px; display: flex; flex-direction: column; flex: 1; }
+  .top      { flex: 1; }
+  .bottom   { margin-top: auto; padding-top: 12px; }
+  .name     { font-size: 14px; font-weight: 600; color: var(--color-ink); line-height: 1.3; margin-bottom: 4px; }
+  .spec     { font-size: 13px; color: var(--color-muted); margin-bottom: 0; }
+  .schedule { font-size: 12px; color: var(--color-body-text); margin-bottom: 12px; }
+
+  @media (max-width: 1024px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 768px)  { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px)  { .grid { grid-template-columns: 1fr; } }
+</style>
+
+<script>
+  const strip = document.getElementById('filterStrip');
+  const grid  = document.getElementById('doctorGrid');
+
+  strip?.addEventListener('click', (e) => {
+    const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('.filter-chip');
+    if (!btn) return;
+
+    strip.querySelectorAll('.filter-chip').forEach((c) => c.classList.remove('active'));
+    btn.classList.add('active');
+
+    const spec = btn.dataset.spec ?? 'all';
+    grid?.querySelectorAll<HTMLElement>('[data-spec]').forEach((card) => {
+      card.style.display = (spec === 'all' || card.dataset.spec === spec) ? '' : 'none';
+    });
+  });
+</script>

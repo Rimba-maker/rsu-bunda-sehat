@@ -1,0 +1,91 @@
+---
+const articles = [
+  {
+    tag: 'Kesehatan Anak',
+    title: 'Kapan Sebaiknya Anak Pertama Kali Cek Mata?',
+    author: 'dr. Maya Indriani, Sp.M',
+    readTime: '4 menit baca',
+    photo: 'https://images.unsplash.com/photo-1512069772995-ec65ed45afd6?w=800&q=80',
+  },
+  {
+    tag: 'Penyakit Metabolik',
+    title: 'Mengenal Gejala Awal Diabetes Tipe 2 — Jangan Diabaikan',
+    author: 'dr. Andika Pramana, Sp.PD',
+    readTime: '6 menit baca',
+    photo: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=800&q=80',
+  },
+  {
+    tag: 'Preventif',
+    title: 'Panduan MCU Tahunan: Apa yang Harus Dicek Sesuai Usia?',
+    author: 'Tim Dokter RSU Bunda Sehat',
+    readTime: '5 menit baca',
+    photo: 'https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=800&q=80',
+  },
+] as const;
+---
+<section class="section" id="tips">
+  <div class="container">
+    <div class="header">
+      <div>
+        <h2 class="section-title reveal">Tips Kesehatan</h2>
+        <p class="section-sub reveal" style="margin-bottom:0">Dari dokter spesialis RSU Bunda Sehat untuk Anda.</p>
+      </div>
+      <a href="#" class="btn-secondary reveal">Lihat semua artikel →</a>
+    </div>
+
+    <div class="grid">
+      {articles.map((a) => (
+        <a href="#" class="card card-hover reveal">
+          <div class="photo" style={`background-image: url('${a.photo}')`} role="img" aria-label={a.title}></div>
+          <div class="body">
+            <span class="tag">{a.tag}</span>
+            <div class="title">{a.title}</div>
+            <div class="meta">
+              <span>{a.author}</span>
+              <span>· {a.readTime}</span>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    flex-wrap: wrap; gap: 16px;
+    margin-bottom: 36px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .card {
+    display: block;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--color-canvas);
+    border: 1px solid var(--color-hairline-soft);
+  }
+  .photo {
+    width: 100%; aspect-ratio: 16/9;
+    background-size: cover; background-position: center;
+    background-color: var(--color-surface-mid);
+  }
+  .body { padding: 18px 20px 20px; }
+  .tag {
+    display: inline-block;
+    background: var(--color-primary-muted);
+    color: var(--color-primary);
+    font-size: 11px; font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    margin-bottom: 10px;
+  }
+  .title { font-size: 15px; font-weight: 600; color: var(--color-ink); line-height: 1.45; margin-bottom: 10px; }
+  .meta  { font-size: 12px; color: var(--color-muted-soft); display: flex; gap: 6px; flex-wrap: wrap; }
+
+  @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+</style>

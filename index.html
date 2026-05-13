@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RSU Bunda Sehat — Rumah Sakit Umum Tipe B Jakarta Timur, 15 Spesialisasi</title>
+  <meta name="description" content="Rumah sakit umum tipe B di Jakarta Timur. 15 spesialisasi, IGD 24/7, 80+ dokter spesialis. Akreditasi Paripurna KARS. BPJS & 20+ asuransi." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,400&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Airbnb Design System Tokens → RSU Bunda Sehat ─── */
+    :root {
+      --primary:       #ff385c;   /* Rausch coral — warm CTA, not cold clinical blue */
+      --primary-hover: #e00b41;
+      --primary-muted: #fff0f3;
+      --ink:           #222222;
+      --body:          #3f3f3f;
+      --muted:         #6a6a6a;
+      --muted-soft:    #929292;
+      --hairline:      #dddddd;
+      --hairline-soft: #ebebeb;
+      --canvas:        #ffffff;
+      --surface-soft:  #f7f7f7;
+      --surface-mid:   #f2f2f2;
+      --on-primary:    #ffffff;
+      --r-xs:  4px;
+      --r-sm:  8px;
+      --r-md:  14px;
+      --r-lg:  20px;
+      --r-xl:  32px;
+      --r-full:9999px;
+      --shadow-card: rgba(0,0,0,.02) 0 0 0 1px, rgba(0,0,0,.05) 0 2px 8px, rgba(0,0,0,.10) 0 4px 12px;
+      --font: 'Inter', -apple-system, system-ui, 'Helvetica Neue', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); background: var(--canvas); color: var(--ink); -webkit-font-smoothing: antialiased; }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* ─── Scroll Reveal ─── */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+    .reveal:nth-child(1) { transition-delay: .00s }
+    .reveal:nth-child(2) { transition-delay: .08s }
+    .reveal:nth-child(3) { transition-delay: .16s }
+    .reveal:nth-child(4) { transition-delay: .24s }
+    .reveal:nth-child(5) { transition-delay: .32s }
+    .reveal:nth-child(6) { transition-delay: .40s }
+    .reveal:nth-child(7) { transition-delay: .48s }
+    .reveal:nth-child(8) { transition-delay: .56s }
+
+    /* ─── Layout Helpers ─── */
+    .container { max-width: 1168px; margin: 0 auto; padding: 0 32px; }
+    .section { padding: 64px 0; }
+    .section-sm { padding: 48px 0; }
+    .section-title { font-size: 24px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+    .section-sub { font-size: 16px; color: var(--muted); margin-bottom: 36px; }
+
+    /* ─── 1. Emergency Banner ─── */
+    .emer-banner {
+      background: var(--primary);
+      color: #fff;
+      text-align: center;
+      padding: 9px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .emer-banner span { display: flex; align-items: center; gap: 6px; }
+    .emer-banner .pulse {
+      display: inline-block;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100% { transform: scale(1) } 50% { transform: scale(1.05) } }
+
+    /* ─── 2. Navbar ─── */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: var(--canvas);
+      border-bottom: 1px solid var(--hairline);
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; }
+    .nav-logo-mark {
+      width: 38px; height: 38px;
+      background: var(--primary);
+      border-radius: var(--r-sm);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-weight: 700; font-size: 14px; letter-spacing: -.3px;
+    }
+    .nav-logo-name { font-size: 15px; font-weight: 700; line-height: 1.15; }
+    .nav-logo-sub { font-size: 11px; color: var(--muted); }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a { font-size: 14px; font-weight: 600; color: var(--ink); transition: color .15s; }
+    .nav-links a:hover { color: var(--primary); }
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      padding: 11px 20px;
+      border-radius: var(--r-sm);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      transition: background .15s, transform .1s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--primary-hover); transform: translateY(-1px); }
+    .btn-secondary {
+      background: var(--canvas);
+      color: var(--ink);
+      padding: 10px 20px;
+      border-radius: var(--r-sm);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid var(--hairline);
+      transition: border-color .15s, box-shadow .15s;
+    }
+    .btn-secondary:hover { border-color: var(--ink); box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+
+    /* ─── 3. Hero ─── */
+    .hero {
+      position: relative;
+      min-height: 520px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: #1a1a1a;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1504813184591-01572f98c85f?w=1920&q=80');
+      background-size: cover;
+      background-position: center 30%;
+      opacity: .3;
+    }
+    .hero-content {
+      position: relative; z-index: 1;
+      width: 100%; max-width: 760px;
+      margin: 0 auto;
+      padding: 80px 32px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.18;
+      margin-bottom: 14px;
+      letter-spacing: -.5px;
+    }
+    .hero p {
+      font-size: 16px;
+      color: rgba(255,255,255,.8);
+      line-height: 1.65;
+      margin-bottom: 36px;
+    }
+
+    /* Pill Search Bar */
+    .search-pill {
+      background: var(--canvas);
+      border-radius: var(--r-full);
+      padding: 6px 6px 6px 24px;
+      display: flex;
+      align-items: center;
+      max-width: 640px;
+      margin: 0 auto 28px;
+      box-shadow: 0 6px 28px rgba(0,0,0,.25), 0 0 0 1px rgba(255,255,255,.08);
+    }
+    .search-seg {
+      flex: 1;
+      padding: 6px 16px 6px 0;
+      border-right: 1px solid var(--hairline);
+    }
+    .search-seg:last-of-type { border-right: none; padding-right: 0; padding-left: 16px; }
+    .search-seg-label { font-size: 11px; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
+    .search-seg-val { font-size: 13px; color: var(--muted-soft); }
+    .search-orb {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 50px; height: 50px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      cursor: pointer;
+      font-size: 20px;
+      transition: background .15s, transform .1s;
+    }
+    .search-orb:hover { background: var(--primary-hover); transform: scale(1.05); }
+
+    /* Trust Badges */
+    .trust-badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .trust-badge {
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.22);
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: var(--r-full);
+      font-size: 12px;
+      font-weight: 500;
+      backdrop-filter: blur(4px);
+    }
+
+    /* ─── 4. Quick Access ─── */
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .quick-card {
+      background: var(--canvas);
+      border: 1px solid var(--hairline-soft);
+      border-radius: var(--r-md);
+      padding: 28px 22px;
+      cursor: pointer;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .quick-card:hover { box-shadow: var(--shadow-card); transform: translateY(-4px); }
+    .quick-card.accent { background: var(--primary-muted); border-color: #ffc8d4; }
+    .quick-icon { font-size: 32px; margin-bottom: 14px; }
+    .quick-title { font-size: 16px; font-weight: 600; color: var(--ink); margin-bottom: 5px; }
+    .quick-sub { font-size: 14px; color: var(--muted); line-height: 1.4; }
+
+    /* ─── 5. Services ─── */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .service-card {
+      border-radius: var(--r-md);
+      overflow: hidden;
+      background: var(--canvas);
+      border: 1px solid var(--hairline-soft);
+      transition: box-shadow .2s, transform .18s;
+      cursor: pointer;
+    }
+    .service-card:hover { box-shadow: var(--shadow-card); transform: translateY(-3px); }
+    .service-photo {
+      width: 100%; aspect-ratio: 4/3;
+      background-size: cover;
+      background-position: center;
+      background-color: var(--surface-mid);
+    }
+    .service-body { padding: 16px; }
+    .service-icon { font-size: 22px; margin-bottom: 8px; }
+    .service-name { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+    .service-meta { font-size: 13px; color: var(--muted); line-height: 1.45; }
+
+    /* ─── 6. Doctors ─── */
+    .filter-strip {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .filter-chip {
+      padding: 8px 18px;
+      border-radius: var(--r-full);
+      font-size: 13px;
+      font-weight: 500;
+      border: 1px solid var(--hairline);
+      background: var(--canvas);
+      color: var(--body);
+      cursor: pointer;
+      transition: border-color .15s, background .15s, color .15s;
+    }
+    .filter-chip:hover, .filter-chip.active {
+      background: var(--ink);
+      color: #fff;
+      border-color: var(--ink);
+    }
+    .doctors-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .doctor-card {
+      border-radius: var(--r-md);
+      overflow: hidden;
+      background: var(--canvas);
+      border: 1px solid var(--hairline-soft);
+      transition: box-shadow .2s, transform .18s;
+      cursor: pointer;
+    }
+    .doctor-card:hover { box-shadow: var(--shadow-card); transform: translateY(-3px); }
+    .doctor-photo {
+      width: 100%; aspect-ratio: 3/4;
+      background-size: cover;
+      background-position: center top;
+      background-color: var(--surface-mid);
+      position: relative;
+    }
+    .doctor-badge {
+      position: absolute; top: 10px; left: 10px;
+      background: var(--canvas);
+      color: var(--ink);
+      font-size: 10px; font-weight: 600;
+      padding: 4px 10px;
+      border-radius: var(--r-full);
+      box-shadow: 0 1px 4px rgba(0,0,0,.12);
+    }
+    .doctor-body { padding: 14px 16px 16px; }
+    .doctor-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; margin-bottom: 3px; }
+    .doctor-spec { font-size: 13px; color: var(--muted); margin-bottom: 10px; }
+    .doctor-schedule { font-size: 12px; color: var(--body); margin-bottom: 12px; }
+    .btn-book {
+      display: block;
+      width: 100%;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: var(--r-sm);
+      padding: 9px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background .15s;
+      text-align: center;
+    }
+    .btn-book:hover { background: var(--primary-hover); }
+
+    /* ─── 7. Facilities ─── */
+    .facilities-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .facility-card {
+      border-radius: var(--r-md);
+      overflow: hidden;
+      background: var(--canvas);
+      border: 1px solid var(--hairline-soft);
+      transition: box-shadow .2s, transform .18s;
+    }
+    .facility-card:hover { box-shadow: var(--shadow-card); transform: translateY(-3px); }
+    .facility-photo {
+      width: 100%; aspect-ratio: 16/10;
+      background-size: cover;
+      background-position: center;
+      background-color: var(--surface-mid);
+    }
+    .facility-body { padding: 18px 20px 20px; }
+    .facility-icon { font-size: 24px; margin-bottom: 8px; }
+    .facility-name { font-size: 16px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+    .facility-desc { font-size: 14px; color: var(--muted); line-height: 1.5; }
+
+    /* ─── 8. MCU Pricing ─── */
+    .mcu-section { background: var(--surface-soft); }
+    .mcu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+    .mcu-card {
+      background: var(--canvas);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-md);
+      padding: 28px 24px;
+      position: relative;
+      transition: box-shadow .2s, transform .18s;
+    }
+    .mcu-card:hover { box-shadow: var(--shadow-card); transform: translateY(-3px); }
+    .mcu-card.popular {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(255,56,92,.12);
+    }
+    .popular-badge {
+      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+      background: var(--primary); color: #fff;
+      font-size: 11px; font-weight: 600; padding: 4px 14px;
+      border-radius: var(--r-full);
+      white-space: nowrap;
+    }
+    .mcu-icon { font-size: 28px; margin-bottom: 12px; }
+    .mcu-name { font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
+    .mcu-price { font-size: 22px; font-weight: 700; color: var(--primary); margin-bottom: 4px; }
+    .mcu-target { font-size: 13px; color: var(--muted); font-style: italic; margin-bottom: 18px; border-bottom: 1px solid var(--hairline-soft); padding-bottom: 14px; }
+    .mcu-item { font-size: 14px; color: var(--body); padding: 5px 0; display: flex; gap: 8px; align-items: flex-start; }
+    .mcu-item::before { content: "✓"; color: var(--primary); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+    .mcu-special-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .mcu-special {
+      background: var(--canvas);
+      border: 1px solid var(--hairline-soft);
+      border-radius: var(--r-md);
+      padding: 18px 20px;
+      display: flex; gap: 12px; align-items: flex-start;
+    }
+    .mcu-special-icon { font-size: 22px; flex-shrink: 0; }
+    .mcu-special-name { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+    .mcu-special-price { font-size: 13px; color: var(--muted); }
+
+    /* ─── 9. Insurance ─── */
+    .insurance-section { background: var(--canvas); }
+    .insurance-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-bottom: 32px; }
+    .logo-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .logo-tile {
+      background: var(--surface-soft);
+      border: 1px solid var(--hairline-soft);
+      border-radius: var(--r-sm);
+      height: 60px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 600; color: var(--muted);
+      padding: 0 12px;
+      text-align: center;
+      transition: border-color .15s, box-shadow .15s;
+    }
+    .logo-tile:hover { border-color: var(--hairline); box-shadow: 0 1px 6px rgba(0,0,0,.06); }
+    .logo-tile.featured { background: var(--primary-muted); border-color: #ffc8d4; color: var(--primary); font-weight: 700; grid-column: span 2; }
+    .pay-badges { display: flex; gap: 10px; flex-wrap: wrap; }
+    .pay-badge {
+      display: flex; align-items: center; gap: 6px;
+      background: var(--surface-soft);
+      border: 1px solid var(--hairline-soft);
+      border-radius: var(--r-sm);
+      padding: 8px 14px;
+      font-size: 13px; color: var(--body);
+    }
+
+    /* ─── 10. Health Tips ─── */
+    .tips-section { background: var(--surface-soft); }
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .tip-card {
+      background: var(--canvas);
+      border-radius: var(--r-md);
+      overflow: hidden;
+      border: 1px solid var(--hairline-soft);
+      transition: box-shadow .2s, transform .18s;
+      cursor: pointer;
+    }
+    .tip-card:hover { box-shadow: var(--shadow-card); transform: translateY(-3px); }
+    .tip-photo {
+      width: 100%; aspect-ratio: 16/9;
+      background-size: cover;
+      background-position: center;
+      background-color: var(--surface-mid);
+    }
+    .tip-body { padding: 18px 20px 20px; }
+    .tip-tag {
+      display: inline-block;
+      background: var(--primary-muted);
+      color: var(--primary);
+      font-size: 11px; font-weight: 600;
+      padding: 3px 10px;
+      border-radius: var(--r-full);
+      margin-bottom: 10px;
+    }
+    .tip-title { font-size: 15px; font-weight: 600; color: var(--ink); line-height: 1.4; margin-bottom: 8px; }
+    .tip-meta { font-size: 12px; color: var(--muted-soft); display: flex; gap: 10px; }
+
+    /* ─── 11. Patient Stories ─── */
+    .stories-section { background: var(--canvas); }
+    .stories-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    .story-card {
+      background: var(--surface-soft);
+      border: 1px solid var(--hairline-soft);
+      border-radius: var(--r-md);
+      padding: 24px 26px;
+    }
+    .story-stars { color: var(--ink); font-size: 13px; margin-bottom: 12px; }
+    .story-quote { font-size: 15px; color: var(--body); line-height: 1.65; margin-bottom: 16px; font-style: italic; }
+    .story-author { display: flex; align-items: center; gap: 10px; }
+    .story-avatar {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: var(--surface-mid);
+      flex-shrink: 0;
+      background-size: cover;
+      background-position: center;
+    }
+    .story-name { font-size: 14px; font-weight: 600; color: var(--ink); }
+    .story-label { font-size: 12px; color: var(--muted); }
+
+    /* ─── 12. Location ─── */
+    .location-section { background: var(--surface-soft); }
+    .location-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+    .contact-group { margin-bottom: 22px; }
+    .contact-label { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 8px; }
+    .contact-item { display: flex; gap: 8px; align-items: flex-start; margin-bottom: 5px; font-size: 14px; color: var(--body); }
+    .map-placeholder {
+      background: var(--surface-mid);
+      border-radius: var(--r-md);
+      height: 320px;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid var(--hairline-soft);
+      flex-direction: column;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .jam-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .jam-item {
+      background: var(--canvas);
+      border-radius: var(--r-sm);
+      padding: 10px 14px;
+      border: 1px solid var(--hairline-soft);
+    }
+    .jam-name { font-size: 12px; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
+    .jam-time { font-size: 13px; color: var(--muted); }
+
+    /* ─── 13. Booking Form ─── */
+    .booking-section {
+      background: linear-gradient(135deg, #2a1a1f 0%, #1a0a0e 100%);
+    }
+    .booking-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .booking-text h2 { font-size: 28px; font-weight: 700; color: #fff; line-height: 1.3; margin-bottom: 12px; }
+    .booking-text p { font-size: 15px; color: rgba(255,255,255,.65); line-height: 1.65; margin-bottom: 24px; }
+    .booking-alts { display: flex; flex-direction: column; gap: 10px; }
+    .booking-alt {
+      display: flex; align-items: center; gap: 10px;
+      color: rgba(255,255,255,.75);
+      font-size: 14px;
+    }
+    .booking-alt-icon { font-size: 18px; }
+    .booking-form {
+      background: var(--canvas);
+      border-radius: var(--r-lg);
+      padding: 32px;
+    }
+    .form-title { font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 22px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-field { display: flex; flex-direction: column; gap: 6px; }
+    .form-field.full { grid-column: span 2; }
+    .form-label { font-size: 12px; font-weight: 600; color: var(--ink); }
+    .form-input {
+      height: 44px;
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-sm);
+      padding: 0 12px;
+      font-family: var(--font);
+      font-size: 14px;
+      color: var(--ink);
+      background: var(--canvas);
+      outline: none;
+      transition: border-color .15s;
+    }
+    .form-input:focus { border-color: var(--ink); border-width: 2px; }
+    .form-submit {
+      margin-top: 6px;
+      width: 100%;
+      height: 48px;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: var(--r-sm);
+      font-family: var(--font);
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background .15s;
+    }
+    .form-submit:hover { background: var(--primary-hover); }
+    .form-note { font-size: 12px; color: var(--muted); text-align: center; margin-top: 8px; }
+
+    /* ─── 14. Footer ─── */
+    .footer { background: var(--canvas); border-top: 1px solid var(--hairline-soft); padding: 48px 32px 0; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+    .footer-brand-tagline { font-size: 14px; color: var(--muted); line-height: 1.6; margin: 12px 0 18px; max-width: 240px; }
+    .footer-accred { display: flex; flex-wrap: wrap; gap: 8px; }
+    .accred-badge {
+      background: var(--surface-soft);
+      border: 1px solid var(--hairline-soft);
+      border-radius: var(--r-xs);
+      padding: 4px 10px;
+      font-size: 11px; font-weight: 600; color: var(--muted);
+    }
+    .footer-col-title { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 14px; }
+    .footer-links { display: flex; flex-direction: column; gap: 8px; }
+    .footer-links a { font-size: 14px; color: var(--muted); transition: color .15s; }
+    .footer-links a:hover { color: var(--ink); }
+    .footer-legal {
+      border-top: 1px solid var(--hairline-soft);
+      padding: 18px 0;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-legal-text { font-size: 12px; color: var(--muted-soft); }
+    .footer-socials { display: flex; gap: 12px; }
+    .social-icon {
+      width: 32px; height: 32px;
+      background: var(--surface-soft);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+      transition: background .15s;
+    }
+    .social-icon:hover { background: var(--surface-mid); }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 1024px) {
+      .services-grid, .doctors-grid { grid-template-columns: repeat(3, 1fr); }
+      .logo-grid { grid-template-columns: repeat(4, 1fr); }
+      .logo-tile.featured { grid-column: span 2; }
+    }
+    @media (max-width: 768px) {
+      .navbar { padding: 0 16px; }
+      .nav-links { display: none; }
+      .container { padding: 0 16px; }
+      .section { padding: 48px 0; }
+      .quick-grid { grid-template-columns: repeat(2, 1fr); }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .doctors-grid { grid-template-columns: repeat(2, 1fr); }
+      .facilities-grid { grid-template-columns: 1fr 1fr; }
+      .mcu-grid { grid-template-columns: 1fr; }
+      .mcu-special-grid { grid-template-columns: 1fr 1fr; }
+      .logo-grid { grid-template-columns: repeat(3, 1fr); }
+      .logo-tile.featured { grid-column: span 1; }
+      .tips-grid { grid-template-columns: 1fr; }
+      .stories-grid { grid-template-columns: 1fr; }
+      .location-grid { grid-template-columns: 1fr; }
+      .booking-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .search-pill { flex-wrap: wrap; border-radius: var(--r-md); padding: 16px; }
+      .search-seg { border-right: none; padding: 8px 0; border-bottom: 1px solid var(--hairline); }
+      .search-seg:last-of-type { border-bottom: none; }
+      .search-orb { width: 100%; border-radius: var(--r-sm); height: 44px; }
+    }
+    @media (max-width: 480px) {
+      .quick-grid { grid-template-columns: 1fr; }
+      .facilities-grid { grid-template-columns: 1fr; }
+      .mcu-special-grid { grid-template-columns: 1fr; }
+      .logo-grid { grid-template-columns: repeat(2, 1fr); }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-field.full { grid-column: span 1; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 1. EMERGENCY BANNER                                     -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="emer-banner">
+  <span><span class="pulse">🚑</span> <strong>IGD 24/7:</strong> (021) 555-1888</span>
+  <span>🚨 Ambulance: 119</span>
+  <span>📞 Customer Care: 0812-3456-7890</span>
+  <span>⏰ Poliklinik: Senin–Sabtu 07.00–21.00</span>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 2. NAVBAR                                               -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<nav class="navbar">
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-mark">BS</div>
+    <div>
+      <div class="nav-logo-name">RSU Bunda Sehat</div>
+      <div class="nav-logo-sub">Rumah Sakit Umum Tipe B · Jakarta Timur</div>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="#layanan">Layanan</a>
+    <a href="#dokter">Dokter</a>
+    <a href="#fasilitas">Fasilitas</a>
+    <a href="#mcu">MCU</a>
+    <a href="#kontak">Karir</a>
+  </div>
+  <a href="#booking" class="btn-primary">Buat Janji Temu</a>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 3. HERO                                                 -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <h1>Kesehatan Keluarga Anda,<br>Prioritas Kami.</h1>
+    <p>Rumah sakit umum tipe B dengan 15 spesialisasi, 250 tempat tidur,<br>dan layanan 24/7 di Jakarta Timur. Akreditasi Paripurna KARS 2024.</p>
+
+    <div class="search-pill">
+      <div class="search-seg">
+        <div class="search-seg-label">Spesialisasi</div>
+        <div class="search-seg-val">Cari spesialisasi...</div>
+      </div>
+      <div class="search-seg">
+        <div class="search-seg-label">Tanggal</div>
+        <div class="search-seg-val">Pilih tanggal</div>
+      </div>
+      <div class="search-seg">
+        <div class="search-seg-label">Nama Dokter</div>
+        <div class="search-seg-val">Opsional</div>
+      </div>
+      <button class="search-orb" aria-label="Cari">🔍</button>
+    </div>
+
+    <div class="trust-badges">
+      <span class="trust-badge">✅ KARS Paripurna 2024</span>
+      <span class="trust-badge">✅ Terdaftar BPJS</span>
+      <span class="trust-badge">✅ 20+ Asuransi Partner</span>
+      <span class="trust-badge">✅ ISO 9001:2015</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 4. QUICK ACCESS                                         -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="quick-grid">
+      <a href="#booking" class="quick-card accent reveal">
+        <div class="quick-icon">🩺</div>
+        <div class="quick-title">Buat Janji Temu</div>
+        <div class="quick-sub">Pilih dokter &amp; jadwal online, konfirmasi dalam 1 jam kerja</div>
+      </a>
+      <a href="tel:+62215551888" class="quick-card accent reveal">
+        <div class="quick-icon">🚑</div>
+        <div class="quick-title">Emergency IGD 24/7</div>
+        <div class="quick-sub">Hubungi (021) 555-1888 — tim siap setiap saat</div>
+      </a>
+      <a href="#mcu" class="quick-card reveal">
+        <div class="quick-icon">🏥</div>
+        <div class="quick-title">Medical Check-Up</div>
+        <div class="quick-sub">Paket sehat preventif dari Rp 850 ribu</div>
+      </a>
+      <a href="https://wa.me/6281234567890" class="quick-card reveal">
+        <div class="quick-icon">📞</div>
+        <div class="quick-title">Customer Care</div>
+        <div class="quick-sub">WhatsApp 24/7 — pertanyaan &amp; jadwal</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 5. SERVICES                                             -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section class="section" id="layanan" style="background: var(--surface-soft);">
+  <div class="container">
+    <div class="section-title reveal">Layanan Medis Kami</div>
+    <div class="section-sub reveal">Pelayanan lengkap untuk segala usia, dari preventif sampai tindakan kompleks.</div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-photo" style="background-image: url('https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=600&q=80')"></div>
+        <div class="service-body">
+          <div class="service-icon">👨‍⚕️</div>
+          <div class="service-name">Rawat Jalan (Poliklinik)</div>
+          <div class="service-meta">15 spesialisasi · Senin–Sabtu 07.00–21.00 · Antrian online</div>
+        </div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-photo" style="background-image: url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600&q=80')"></div>
+        <div class="service-body">
+          <div class="service-icon">🏥</div>
+          <div class="service-name">Rawat Inap</div>
+          <div class="service-meta">250 tempat tidur · Kelas 1–3, VIP, VVIP · Nursing 24/7</div>
+        </div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-photo" style="background-image: url('https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?w=600&q=80')"></div>
+        <div class="service-body">
+          <div class="service-icon">🚑</div>
+          <div class="service-name">IGD 24/7</div>
+          <div class="service-meta">Triage sistem merah–kuning–hijau · Tanpa antrian · Transfer spesialis</div>
+        </div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-photo" style="background-image: url('https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=600&q=80')"></div>
+        <div class="service-body">
+          <div class="service-icon">🤰</div>
+          <div class="service-name">Maternal &amp; Anak</div>
+          <div class="service-meta">USG 4D · NICU &amp; PICU level 3 · Laktasi konsultan</div>
+        </div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-photo" style="background-image: url('https://images.unsplash.com/photo-1559757175-5700dde675bc?w=600&q=80')"></div>
+        <div class="service-body">
+          <div class="service-icon">❤️</div>
+          <div class="service-name">Cardiac Center</div>
+          <div class="service-meta">Cath lab · PCI emergency 24/7 · Ekokardiografi · Treadmill test</div>
+        </div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-photo" style="background-image: url('https://images.unsplash.com/photo-1578496480157-697fc14d2e55?w=600&q=80')"></div>
+        <div class="service-body">
+          <div class="service-icon">🔬</div>
+          <div class="service-name">Lab &amp; Diagnostik</div>
+          <div class="service-meta">Lab 24/7 · MRI 1.5T · CT-Scan · USG · Hasil online via app</div>
+        </div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-photo" style="background-image: url('https://images.unsplash.com/photo-1576671081837-49000212a370?w=600&q=80')"></div>
+        <div class="service-body">
+          <div class="service-icon">💉</div>
+          <div class="service-name">Vaksinasi &amp; Imunisasi</div>
+          <div class="service-meta">Vaksin anak (IDAI) · Dewasa &amp; lansia · Travel vaccine</div>
+        </div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-photo" style="background-image: url('https://images.unsplash.com/photo-1666214280391-8ff5bd3c0bf0?w=600&q=80')"></div>
+        <div class="service-body">
+          <div class="service-icon">🏃</div>
+          <div class="service-name">Medical Check-Up</div>
+          <div class="service-meta">General · Eksekutif · Pre-employment · Pre-marriage · Pediatrik</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 6. SPECIALIST DOCTORS                                   -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section class="section" id="dokter">
+  <div class="container">
+    <div class="section-title reveal">Tim Dokter Spesialis</div>
+    <div class="section-sub reveal">80+ dokter spesialis bersertifikat siap melayani Anda.</div>
+
+    <div class="filter-strip reveal" id="filterStrip">
+      <button class="filter-chip active" onclick="filterDok(this,'all')">Semua</button>
+      <button class="filter-chip" onclick="filterDok(this,'dalam')">Penyakit Dalam</button>
+      <button class="filter-chip" onclick="filterDok(this,'anak')">Anak</button>
+      <button class="filter-chip" onclick="filterDok(this,'kandungan')">Kandungan</button>
+      <button class="filter-chip" onclick="filterDok(this,'jantung')">Jantung</button>
+      <button class="filter-chip" onclick="filterDok(this,'bedah')">Bedah</button>
+      <button class="filter-chip" onclick="filterDok(this,'saraf')">Saraf</button>
+      <button class="filter-chip" onclick="filterDok(this,'mata')">Mata</button>
+      <button class="filter-chip" onclick="filterDok(this,'kulit')">Kulit</button>
+    </div>
+
+    <div class="doctors-grid" id="dokterGrid">
+      <div class="doctor-card reveal" data-spec="dalam">
+        <div class="doctor-photo" style="background-image: url('https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=600&q=80')">
+          <span class="doctor-badge">Konsultan</span>
+        </div>
+        <div class="doctor-body">
+          <div class="doctor-name">dr. Andika Pramana, Sp.PD-KGEH</div>
+          <div class="doctor-spec">Penyakit Dalam · Gastroenterohepatologi</div>
+          <div class="doctor-schedule">⏰ Senin, Rabu, Jumat — 09.00–14.00</div>
+          <a href="#booking" class="btn-book">Buat Janji</a>
+        </div>
+      </div>
+      <div class="doctor-card reveal" data-spec="anak">
+        <div class="doctor-photo" style="background-image: url('https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=600&q=80')">
+          <span class="doctor-badge">Konsultan</span>
+        </div>
+        <div class="doctor-body">
+          <div class="doctor-name">dr. Sari Wulandari, Sp.A(K)</div>
+          <div class="doctor-spec">Spesialis Anak Konsultan</div>
+          <div class="doctor-schedule">⏰ Selasa, Kamis — 10.00–16.00</div>
+          <a href="#booking" class="btn-book">Buat Janji</a>
+        </div>
+      </div>
+      <div class="doctor-card reveal" data-spec="kandungan">
+        <div class="doctor-photo" style="background-image: url('https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=600&q=80')">
+          <span class="doctor-badge">Spesialis</span>
+        </div>
+        <div class="doctor-body">
+          <div class="doctor-name">dr. Reza Hartono, Sp.OG</div>
+          <div class="doctor-spec">Kandungan &amp; Kebidanan</div>
+          <div class="doctor-schedule">⏰ Senin–Sabtu — 08.00–13.00</div>
+          <a href="#booking" class="btn-book">Buat Janji</a>
+        </div>
+      </div>
+      <div class="doctor-card reveal" data-spec="jantung">
+        <div class="doctor-photo" style="background-image: url('https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=600&q=80')">
+          <span class="doctor-badge">Konsultan</span>
+        </div>
+        <div class="doctor-body">
+          <div class="doctor-name">dr. Linda Wijaya, Sp.JP(K)</div>
+          <div class="doctor-spec">Kardiologi Konsultan</div>
+          <div class="doctor-schedule">⏰ Rabu, Jumat — 13.00–18.00</div>
+          <a href="#booking" class="btn-book">Buat Janji</a>
+        </div>
+      </div>
+      <div class="doctor-card reveal" data-spec="bedah">
+        <div class="doctor-photo" style="background-image: url('https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=600&q=80')">
+          <span class="doctor-badge">Spesialis</span>
+        </div>
+        <div class="doctor-body">
+          <div class="doctor-name">dr. Bayu Setiawan, Sp.B</div>
+          <div class="doctor-spec">Bedah Umum</div>
+          <div class="doctor-schedule">⏰ Senin, Selasa, Kamis — 14.00–19.00</div>
+          <a href="#booking" class="btn-book">Buat Janji</a>
+        </div>
+      </div>
+      <div class="doctor-card reveal" data-spec="mata">
+        <div class="doctor-photo" style="background-image: url('https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=600&q=80')">
+          <span class="doctor-badge">Spesialis</span>
+        </div>
+        <div class="doctor-body">
+          <div class="doctor-name">dr. Maya Indriani, Sp.M</div>
+          <div class="doctor-spec">Mata</div>
+          <div class="doctor-schedule">⏰ Senin–Jumat — 10.00–15.00</div>
+          <a href="#booking" class="btn-book">Buat Janji</a>
+        </div>
+      </div>
+      <div class="doctor-card reveal" data-spec="saraf">
+        <div class="doctor-photo" style="background-image: url('https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=600&q=80')">
+          <span class="doctor-badge">Spesialis</span>
+        </div>
+        <div class="doctor-body">
+          <div class="doctor-name">dr. Daniel Kurniawan, Sp.S</div>
+          <div class="doctor-spec">Saraf</div>
+          <div class="doctor-schedule">⏰ Selasa, Jumat — 09.00–14.00</div>
+          <a href="#booking" class="btn-book">Buat Janji</a>
+        </div>
+      </div>
+      <div class="doctor-card reveal" data-spec="kulit">
+        <div class="doctor-photo" style="background-image: url('https://images.unsplash.com/photo-1527613426441-4da17471b66d?w=600&q=80')">
+          <span class="doctor-badge">Spesialis</span>
+        </div>
+        <div class="doctor-body">
+          <div class="doctor-name">dr. Nina Hartati, Sp.KK</div>
+          <div class="doctor-spec">Kulit &amp; Kelamin</div>
+          <div class="doctor-schedule">⏰ Rabu, Sabtu — 11.00–16.00</div>
+          <a href="#booking" class="btn-book">Buat Janji</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 7. FACILITIES                                           -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section class="section" id="fasilitas" style="background: var(--surface-soft);">
+  <div class="container">
+    <div class="section-title reveal">Fasilitas Modern, Pelayanan Caring</div>
+    <div class="section-sub reveal">Infrastruktur kelas rumah sakit rujukan dengan sentuhan kehangatan keluarga.</div>
+    <div class="facilities-grid">
+      <div class="facility-card reveal">
+        <div class="facility-photo" style="background-image: url('https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=800&q=80')"></div>
+        <div class="facility-body">
+          <div class="facility-icon">🛏️</div>
+          <div class="facility-name">Kamar Rawat Inap</div>
+          <div class="facility-desc">VVIP king-size bed + sofa keluarga · VIP &amp; Kelas 1–3 · AC semua kelas · BPJS-friendly</div>
+        </div>
+      </div>
+      <div class="facility-card reveal">
+        <div class="facility-photo" style="background-image: url('https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=800&q=80')"></div>
+        <div class="facility-body">
+          <div class="facility-icon">🔬</div>
+          <div class="facility-name">Diagnostic Center</div>
+          <div class="facility-desc">MRI 1.5T Siemens · CT-Scan 128 slice · USG 4D Doppler · Mammografi · Endoscopy</div>
+        </div>
+      </div>
+      <div class="facility-card reveal">
+        <div class="facility-photo" style="background-image: url('https://images.unsplash.com/photo-1551076805-e1869033e561?w=800&q=80')"></div>
+        <div class="facility-body">
+          <div class="facility-icon">🚑</div>
+          <div class="facility-name">IGD Fully Equipped</div>
+          <div class="facility-desc">8 bed observasi · 2 trauma bay · Resuscitation room · Helipad rooftop</div>
+        </div>
+      </div>
+      <div class="facility-card reveal">
+        <div class="facility-photo" style="background-image: url('https://images.unsplash.com/photo-1631815589968-fdb09a223b1e?w=800&q=80')"></div>
+        <div class="facility-body">
+          <div class="facility-icon">🤰</div>
+          <div class="facility-name">Birth Center</div>
+          <div class="facility-desc">6 labor room · 2 OK obstetri · NICU 12 bed (level 3) · Bonding suite</div>
+        </div>
+      </div>
+      <div class="facility-card reveal">
+        <div class="facility-photo" style="background-image: url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=800&q=80')"></div>
+        <div class="facility-body">
+          <div class="facility-icon">❤️</div>
+          <div class="facility-name">Cath Lab &amp; ICU</div>
+          <div class="facility-desc">ICU 16 bed · CCU 8 bed · HCU 12 bed · Hemodialisis 20 unit</div>
+        </div>
+      </div>
+      <div class="facility-card reveal">
+        <div class="facility-photo" style="background-image: url('https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80')"></div>
+        <div class="facility-body">
+          <div class="facility-icon">🍃</div>
+          <div class="facility-name">Healing Environment</div>
+          <div class="facility-desc">Taman therapeutic · Kantin keluarga · Mushola · Free Wi-Fi · Parkir 500 mobil</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 8. MEDICAL CHECK-UP                                     -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section class="section mcu-section" id="mcu">
+  <div class="container">
+    <div class="section-title reveal">Paket Medical Check-Up</div>
+    <div class="section-sub reveal">Deteksi dini, pencegahan terbaik. Pilih paket sesuai kebutuhan.</div>
+
+    <div class="mcu-grid">
+      <div class="mcu-card reveal">
+        <div class="mcu-icon">🌱</div>
+        <div class="mcu-name">Basic MCU</div>
+        <div class="mcu-price">Rp 850.000</div>
+        <div class="mcu-target">Untuk usia &lt;35 tahun, rutin tahunan</div>
+        <div class="mcu-item">Konsultasi dokter umum</div>
+        <div class="mcu-item">Cek darah lengkap, urine</div>
+        <div class="mcu-item">Fungsi liver &amp; ginjal</div>
+        <div class="mcu-item">Gula darah &amp; kolesterol</div>
+        <div class="mcu-item">EKG dasar</div>
+        <div class="mcu-item">Foto rontgen dada</div>
+        <a href="#booking" class="btn-primary" style="display:block; text-align:center; margin-top:20px;">Pesan Paket</a>
+      </div>
+      <div class="mcu-card popular reveal">
+        <span class="popular-badge">⭐ Paling Populer</span>
+        <div class="mcu-icon">🌿</div>
+        <div class="mcu-name">Premium MCU</div>
+        <div class="mcu-price">Rp 2.500.000</div>
+        <div class="mcu-target">Untuk usia 35–50, eksekutif</div>
+        <div class="mcu-item">Semua item Basic MCU</div>
+        <div class="mcu-item">Tumor marker (CEA, AFP, PSA/CA-125)</div>
+        <div class="mcu-item">USG abdomen</div>
+        <div class="mcu-item">Treadmill test</div>
+        <div class="mcu-item">Konsultasi penyakit dalam</div>
+        <div class="mcu-item">Vitamin D &amp; fungsi tiroid</div>
+        <a href="#booking" class="btn-primary" style="display:block; text-align:center; margin-top:20px;">Pesan Paket</a>
+      </div>
+      <div class="mcu-card reveal">
+        <div class="mcu-icon">🌳</div>
+        <div class="mcu-name">Executive MCU</div>
+        <div class="mcu-price">Rp 5.500.000</div>
+        <div class="mcu-target">Untuk usia 50+ atau riwayat penyakit</div>
+        <div class="mcu-item">Semua item Premium MCU</div>
+        <div class="mcu-item">MRI / CT-Scan area tertentu</div>
+        <div class="mcu-item">Echocardiography</div>
+        <div class="mcu-item">Colonoscopy screening (opt-in)</div>
+        <div class="mcu-item">Konsultasi multi-spesialis</div>
+        <div class="mcu-item">Personalized health report</div>
+        <a href="#booking" class="btn-primary" style="display:block; text-align:center; margin-top:20px;">Pesan Paket</a>
+      </div>
+    </div>
+
+    <div class="mcu-special-grid">
+      <div class="mcu-special reveal">
+        <div class="mcu-special-icon">📋</div>
+        <div>
+          <div class="mcu-special-name">Pre-Employment MCU</div>
+          <div class="mcu-special-price">Mulai Rp 450.000 · Bulk corporate tersedia</div>
+        </div>
+      </div>
+      <div class="mcu-special reveal">
+        <div class="mcu-special-icon">💍</div>
+        <div>
+          <div class="mcu-special-name">Pre-Marriage MCU</div>
+          <div class="mcu-special-price">Mulai Rp 950.000 untuk pasangan</div>
+        </div>
+      </div>
+      <div class="mcu-special reveal">
+        <div class="mcu-special-icon">👶</div>
+        <div>
+          <div class="mcu-special-name">Pediatric MCU</div>
+          <div class="mcu-special-price">Mulai Rp 650.000 untuk anak</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 9. INSURANCE PARTNERS                                   -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section class="section insurance-section">
+  <div class="container">
+    <div class="insurance-header">
+      <div>
+        <div class="section-title reveal">Kami Bekerjasama Dengan</div>
+        <div class="section-sub reveal" style="margin-bottom: 0;">BPJS Kesehatan + 20+ asuransi swasta untuk kemudahan Anda.</div>
+      </div>
+    </div>
+
+    <div class="logo-grid">
+      <div class="logo-tile featured reveal">BPJS<br>Kesehatan</div>
+      <div class="logo-tile reveal">Allianz</div>
+      <div class="logo-tile reveal">AXA Mandiri</div>
+      <div class="logo-tile reveal">Cigna</div>
+      <div class="logo-tile reveal">Prudential</div>
+      <div class="logo-tile reveal">Sun Life</div>
+      <div class="logo-tile reveal">Manulife</div>
+      <div class="logo-tile reveal">AIA</div>
+      <div class="logo-tile reveal">FWD</div>
+      <div class="logo-tile reveal">Generali</div>
+      <div class="logo-tile reveal">BNI Life</div>
+      <div class="logo-tile reveal">Astra Life</div>
+      <div class="logo-tile reveal">Sequislife</div>
+      <div class="logo-tile reveal">Tugu Ins.</div>
+    </div>
+
+    <div class="pay-badges reveal">
+      <span class="pay-badge">✅ BPJS Kesehatan (rujukan)</span>
+      <span class="pay-badge">✅ Cashless 20+ asuransi swasta</span>
+      <span class="pay-badge">✅ Reimbursement dokumen lengkap</span>
+      <span class="pay-badge">✅ Transfer · Debit · Kredit · QRIS</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 10. HEALTH TIPS                                         -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section class="section tips-section">
+  <div class="container">
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:36px; flex-wrap:wrap; gap:12px;">
+      <div>
+        <div class="section-title reveal">Tips Kesehatan</div>
+        <div class="section-sub reveal" style="margin-bottom:0;">Dari dokter spesialis RSU Bunda Sehat untuk Anda.</div>
+      </div>
+      <a href="#" class="btn-secondary reveal">Lihat semua artikel →</a>
+    </div>
+    <div class="tips-grid">
+      <div class="tip-card reveal">
+        <div class="tip-photo" style="background-image: url('https://images.unsplash.com/photo-1512069772995-ec65ed45afd6?w=800&q=80')"></div>
+        <div class="tip-body">
+          <span class="tip-tag">Kesehatan Anak</span>
+          <div class="tip-title">Kapan Sebaiknya Anak Pertama Kali Cek Mata?</div>
+          <div class="tip-meta">
+            <span>dr. Maya Indriani, Sp.M</span>
+            <span>· 4 menit baca</span>
+          </div>
+        </div>
+      </div>
+      <div class="tip-card reveal">
+        <div class="tip-photo" style="background-image: url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=800&q=80')"></div>
+        <div class="tip-body">
+          <span class="tip-tag">Penyakit Metabolik</span>
+          <div class="tip-title">Mengenal Gejala Awal Diabetes Tipe 2 — Jangan Diabaikan</div>
+          <div class="tip-meta">
+            <span>dr. Andika Pramana, Sp.PD</span>
+            <span>· 6 menit baca</span>
+          </div>
+        </div>
+      </div>
+      <div class="tip-card reveal">
+        <div class="tip-photo" style="background-image: url('https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=800&q=80')"></div>
+        <div class="tip-body">
+          <span class="tip-tag">Preventif</span>
+          <div class="tip-title">Panduan MCU Tahunan: Apa yang Harus Dicek Sesuai Usia?</div>
+          <div class="tip-meta">
+            <span>Tim Dokter RSU Bunda Sehat</span>
+            <span>· 5 menit baca</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 11. PATIENT STORIES                                     -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section class="section stories-section">
+  <div class="container">
+    <div class="section-title reveal">Cerita Dari Pasien Kami</div>
+    <div class="section-sub reveal">Pengalaman nyata keluarga yang mempercayakan kesehatan mereka kepada kami.</div>
+    <div class="stories-grid">
+      <div class="story-card reveal">
+        <div class="story-stars">★★★★★ 5.0</div>
+        <div class="story-quote">"Anak saya operasi appendicitis di RSU Bunda Sehat. Tim dokter dan perawat sabar menjelaskan setiap langkah, anak saya cepat pulih. Pelayanan benar-benar caring."</div>
+        <div class="story-author">
+          <div class="story-avatar" style="background-image: url('https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=80&q=80')"></div>
+          <div>
+            <div class="story-name">Ibu Lina</div>
+            <div class="story-label">Ibu pasien anak, Jakarta Timur</div>
+          </div>
+        </div>
+      </div>
+      <div class="story-card reveal">
+        <div class="story-stars">★★★★★ 5.0</div>
+        <div class="story-quote">"Sebagai pasien BPJS, antrian dan layanan cukup efisien. Dokter penyakit dalam saya komunikatif, tidak terburu-buru, dan penjelasannya sangat jelas."</div>
+        <div class="story-author">
+          <div class="story-avatar" style="background-image: url('https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=80&q=80')"></div>
+          <div>
+            <div class="story-name">Pak Bambang</div>
+            <div class="story-label">Pensiunan, pasien rawat jalan</div>
+          </div>
+        </div>
+      </div>
+      <div class="story-card reveal">
+        <div class="story-stars">★★★★★ 5.0</div>
+        <div class="story-quote">"Melahirkan anak pertama di sini. Fasilitas NICU sangat lengkap saat bayi butuh perawatan ekstra. Nurse 24/7 supportive dan selalu memperbarui kondisi bayi."</div>
+        <div class="story-author">
+          <div class="story-avatar" style="background-image: url('https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&q=80')"></div>
+          <div>
+            <div class="story-name">Bu Sari</div>
+            <div class="story-label">Ibu baru, pasien Birth Center</div>
+          </div>
+        </div>
+      </div>
+      <div class="story-card reveal">
+        <div class="story-stars">★★★★★ 5.0</div>
+        <div class="story-quote">"MCU tahunan kami sekeluarga sudah 3 tahun di sini. Hasil cepat keluar, dokter menjelaskan dengan sangat baik, dan follow-up tindakan lanjutannya jelas."</div>
+        <div class="story-author">
+          <div class="story-avatar" style="background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&q=80')"></div>
+          <div>
+            <div class="story-name">Keluarga Wijaya</div>
+            <div class="story-label">Pasien MCU tahunan sejak 2021</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 12. LOCATION & CONTACT                                  -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section class="section location-section" id="kontak" style="background: var(--surface-soft);">
+  <div class="container">
+    <div class="section-title reveal">Lokasi &amp; Kontak</div>
+    <div class="section-sub reveal">Kami berada di jantung Jakarta Timur, mudah dijangkau dari berbagai arah.</div>
+    <div class="location-grid">
+      <div>
+        <div class="contact-group reveal">
+          <div class="contact-label">Alamat</div>
+          <div class="contact-item">📍 Jl. Bunda Sehat No. 88, Jakarta Timur 13420</div>
+        </div>
+
+        <div class="contact-group reveal">
+          <div class="contact-label">Hotline 24/7</div>
+          <div class="contact-item">🚑 Emergency IGD: 119 atau (021) 555-1888</div>
+          <div class="contact-item">📞 Informasi: (021) 555-1999</div>
+          <div class="contact-item">💬 WhatsApp: 0812-3456-7890</div>
+        </div>
+
+        <div class="contact-group reveal">
+          <div class="contact-label">Jam Operasional</div>
+          <div class="jam-grid">
+            <div class="jam-item">
+              <div class="jam-name">🚑 IGD</div>
+              <div class="jam-time">24 jam / 7 hari</div>
+            </div>
+            <div class="jam-item">
+              <div class="jam-name">👨‍⚕️ Poliklinik</div>
+              <div class="jam-time">Sn–Sb 07.00–21.00<br>Mg 08.00–15.00</div>
+            </div>
+            <div class="jam-item">
+              <div class="jam-name">💊 Apotek</div>
+              <div class="jam-time">24 jam / 7 hari</div>
+            </div>
+            <div class="jam-item">
+              <div class="jam-name">🔬 Lab</div>
+              <div class="jam-time">24 jam / 7 hari</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-group reveal">
+          <div class="contact-label">Parkir</div>
+          <div class="contact-item">🚗 500 mobil + 200 motor · Gratis 2 jam pertama</div>
+        </div>
+      </div>
+
+      <div class="map-placeholder reveal">
+        <div style="font-size: 48px;">🗺️</div>
+        <div style="font-weight: 600; color: var(--ink);">Jl. Bunda Sehat No. 88</div>
+        <div>Jakarta Timur — 5 menit dari Tol Dalam Kota</div>
+        <a href="https://maps.google.com" target="_blank" class="btn-primary" style="margin-top:8px;">
+          Buka di Google Maps
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 13. BOOKING FORM                                        -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section class="section booking-section" id="booking">
+  <div class="container">
+    <div class="booking-grid">
+      <div class="booking-text">
+        <h2>Buat Janji Temu<br>Online</h2>
+        <p>Pilih dokter, tanggal, dan jam yang sesuai. Kami akan mengkonfirmasi dalam 1 jam kerja — tanpa perlu datang ke loket.</p>
+        <div class="booking-alts">
+          <div class="booking-alt">
+            <span class="booking-alt-icon">💬</span>
+            <div>
+              <div style="font-weight:600; color:#fff;">WhatsApp Langsung</div>
+              <div>0812-3456-7890 — respons cepat</div>
+            </div>
+          </div>
+          <div class="booking-alt">
+            <span class="booking-alt-icon">📞</span>
+            <div>
+              <div style="font-weight:600; color:#fff;">Telepon Customer Care</div>
+              <div>(021) 555-1999 — Senin–Sabtu 07.00–20.00</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="booking-form">
+        <div class="form-title">Form Janji Temu</div>
+        <form>
+          <div class="form-grid">
+            <div class="form-field">
+              <label class="form-label">Nama Lengkap</label>
+              <input type="text" class="form-input" placeholder="Nama sesuai KTP" />
+            </div>
+            <div class="form-field">
+              <label class="form-label">Tanggal Lahir</label>
+              <input type="date" class="form-input" />
+            </div>
+            <div class="form-field">
+              <label class="form-label">Nomor WhatsApp</label>
+              <input type="tel" class="form-input" placeholder="08xx-xxxx-xxxx" />
+            </div>
+            <div class="form-field">
+              <label class="form-label">Tanggal Preferensi</label>
+              <input type="date" class="form-input" />
+            </div>
+            <div class="form-field full">
+              <label class="form-label">Spesialisasi</label>
+              <select class="form-input" style="cursor:pointer;">
+                <option value="">Pilih spesialisasi...</option>
+                <option>Penyakit Dalam</option>
+                <option>Kandungan &amp; Kebidanan</option>
+                <option>Anak</option>
+                <option>Bedah Umum</option>
+                <option>Jantung &amp; Pembuluh Darah</option>
+                <option>Saraf</option>
+                <option>Mata</option>
+                <option>THT</option>
+                <option>Kulit &amp; Kelamin</option>
+                <option>Ortopedi</option>
+              </select>
+            </div>
+            <div class="form-field full">
+              <label class="form-label">Nama Dokter (Opsional)</label>
+              <input type="text" class="form-input" placeholder="Biarkan kosong jika belum ada preferensi" />
+            </div>
+          </div>
+          <button type="submit" class="form-submit">Buat Janji Temu →</button>
+          <div class="form-note">Konfirmasi dikirim via WhatsApp dalam 1 jam kerja</div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 14. FOOTER                                              -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="container" style="padding: 0;">
+    <div class="footer-grid">
+      <div>
+        <div class="nav-logo" style="margin-bottom:14px;">
+          <div class="nav-logo-mark">BS</div>
+          <div>
+            <div class="nav-logo-name">RSU Bunda Sehat</div>
+            <div class="nav-logo-sub">Rumah Sakit Umum Tipe B</div>
+          </div>
+        </div>
+        <p class="footer-brand-tagline">Merawat Indonesia, Generasi ke Generasi.</p>
+        <div class="footer-accred">
+          <span class="accred-badge">KARS Paripurna 2024</span>
+          <span class="accred-badge">ISO 9001:2015</span>
+          <span class="accred-badge">ISO 14001</span>
+          <span class="accred-badge">Kemenkes RI</span>
+          <span class="accred-badge">Pemda DKI</span>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Layanan</div>
+        <div class="footer-links">
+          <a href="#layanan">Rawat Jalan</a>
+          <a href="#layanan">Rawat Inap</a>
+          <a href="#layanan">IGD 24/7</a>
+          <a href="#layanan">Maternal &amp; Anak</a>
+          <a href="#layanan">Cardiac Center</a>
+          <a href="#mcu">Medical Check-Up</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Informasi</div>
+        <div class="footer-links">
+          <a href="#dokter">Tim Dokter</a>
+          <a href="#fasilitas">Fasilitas</a>
+          <a href="#">BPJS &amp; Asuransi</a>
+          <a href="#">Karir</a>
+          <a href="#">Pengaduan Pasien</a>
+          <a href="#">Donasi &amp; CSR</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Hubungi Kami</div>
+        <div class="footer-links">
+          <a href="tel:+62215551888">🚑 IGD: (021) 555-1888</a>
+          <a href="tel:+62215551999">📞 Info: (021) 555-1999</a>
+          <a href="https://wa.me/6281234567890">💬 WhatsApp</a>
+          <a href="#">📧 Email kami</a>
+        </div>
+        <div style="margin-top: 16px; font-size: 13px; color: var(--muted);">
+          Jl. Bunda Sehat No. 88<br>Jakarta Timur 13420
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-legal">
+      <div class="footer-legal-text">© 2025 RSU Bunda Sehat. Semua hak dilindungi. · <a href="#" style="color: inherit;">Kebijakan Privasi</a> · <a href="#" style="color: inherit;">Syarat &amp; Ketentuan</a></div>
+      <div class="footer-socials">
+        <a href="#" class="social-icon" title="Instagram @rsubundasehat">📸</a>
+        <a href="#" class="social-icon" title="Facebook RSU Bunda Sehat">👤</a>
+        <a href="#" class="social-icon" title="YouTube Health Education">▶️</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* ── Scroll Reveal ── */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); } });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  /* ── Doctor Filter ── */
+  function filterDok(btn, spec) {
+    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.doctor-card').forEach(card => {
+      card.style.display = (spec === 'all' || card.dataset.spec === spec) ? '' : 'none';
+    });
+  }
+
+  /* ── Form prevent default ── */
+  document.querySelector('form')?.addEventListener('submit', e => {
+    e.preventDefault();
+    const btn = e.target.querySelector('.form-submit');
+    btn.textContent = '✅ Janji terkirim — kami akan konfirmasi segera';
+    btn.style.background = '#22c55e';
+  });
+</script>
+</body>
+</html>

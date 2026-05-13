@@ -1,0 +1,53 @@
+---
+import { facilities } from '../../data/facilities';
+---
+<section class="section-alt" id="fasilitas">
+  <div class="container">
+    <h2 class="section-title reveal">Fasilitas Modern, Pelayanan Caring</h2>
+    <p class="section-sub reveal">Infrastruktur kelas rumah sakit rujukan dengan sentuhan kehangatan keluarga.</p>
+
+    <div class="grid">
+      {facilities.map((f) => (
+        <div class="card card-hover reveal">
+          <div
+            class="photo"
+            style={`background-image: url('${f.photo}')`}
+            role="img"
+            aria-label={f.name}
+          ></div>
+          <div class="body">
+            <div class="icon">{f.icon}</div>
+            <div class="name">{f.name}</div>
+            <div class="desc">{f.desc}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .card {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--color-canvas);
+    border: 1px solid var(--color-hairline-soft);
+  }
+  .photo {
+    width: 100%; aspect-ratio: 16/10;
+    background-size: cover; background-position: center;
+    background-color: var(--color-surface-mid);
+  }
+  .body { padding: 18px 20px 20px; }
+  .icon { font-size: 24px; margin-bottom: 8px; }
+  .name { font-size: 16px; font-weight: 600; color: var(--color-ink); margin-bottom: 6px; }
+  .desc { font-size: 14px; color: var(--color-muted); line-height: 1.55; }
+
+  @media (max-width: 768px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .grid { grid-template-columns: 1fr; } }
+</style>
