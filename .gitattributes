@@ -1,0 +1,2 @@
+* text=auto eol=lf
+*.{astro,ts,js,mjs,css,json,md,yaml,svg,html} text eol=lf
