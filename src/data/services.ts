@@ -1,57 +1,66 @@
 export interface Service {
-  icon: string;
   name: string;
   meta: string;
+  text: string;
   photo: string;
+  alt: string;
 }
 
 export const services: Service[] = [
   {
-    icon: '👨‍⚕️',
-    name: 'Rawat Jalan (Poliklinik)',
-    meta: '15 spesialisasi · Senin–Sabtu 07.00–21.00 · Antrian online',
-    photo: 'https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=600&q=80',
+    name: 'Rawat Jalan',
+    meta: '15 spesialisasi',
+    text: 'Poliklinik buka Senin–Sabtu 07.00–21.00. Antrean online, jadi Anda datang saat dokter siap.',
+    photo: 'rawat-jalan',
+    alt: 'Dokter berbincang dengan ibu dan anak di poliklinik',
   },
   {
-    icon: '🏥',
     name: 'Rawat Inap',
-    meta: '250 tempat tidur · Kelas 1–3, VIP, VVIP · Nursing 24/7',
-    photo: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600&q=80',
+    meta: '250 tempat tidur',
+    text: 'Kelas 1, 2, 3, VIP dan VVIP, kamar single atau family room, dengan perawat siaga 24 jam.',
+    photo: 'rawat-inap',
+    alt: 'Kamar rawat inap dengan tempat tidur pasien',
   },
   {
-    icon: '🚑',
-    name: 'IGD 24/7',
-    meta: 'Triage merah–kuning–hijau · Tanpa antrian · Transfer spesialis',
-    photo: 'https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?w=600&q=80',
+    name: 'IGD 24 Jam',
+    meta: 'Tanpa janji temu',
+    text: 'Triage merah-kuning-hijau, stabilisasi cepat, dan rujukan langsung ke dokter spesialis.',
+    photo: 'igd-ambulans',
+    alt: 'Paramedis berdiri di depan ambulans',
   },
   {
-    icon: '🤰',
     name: 'Maternal & Anak',
-    meta: 'USG 4D · NICU & PICU level 3 · Laktasi konsultan',
-    photo: 'https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=600&q=80',
+    meta: 'NICU & PICU level 3',
+    text: 'Klinik kandungan dan bayi tabung, USG 4D, dan konsultan laktasi untuk ibu baru.',
+    photo: 'maternal',
+    alt: 'Bayi baru lahir menggenggam tangan ibunya di rumah sakit',
   },
   {
-    icon: '❤️',
     name: 'Cardiac Center',
-    meta: 'Cath lab · PCI emergency 24/7 · Ekokardiografi · Treadmill test',
-    photo: 'https://images.unsplash.com/photo-1559757175-5700dde675bc?w=600&q=80',
+    meta: 'PCI emergency 24 jam',
+    text: 'EKG, treadmill, ekokardiografi, dan kateterisasi jantung di cath lab kami.',
+    photo: 'jantung-ekg',
+    alt: 'Elektroda EKG di dada pasien',
   },
   {
-    icon: '🔬',
-    name: 'Lab & Diagnostik',
-    meta: 'Lab 24/7 · MRI 1.5T · CT-Scan · USG · Hasil online via app',
-    photo: 'https://images.unsplash.com/photo-1578496480157-697fc14d2e55?w=600&q=80',
+    name: 'Laboratorium & Diagnostik',
+    meta: 'Hasil via aplikasi',
+    text: 'Lab klinik 24 jam. Radiologi: X-ray, USG, CT-Scan dan MRI 1.5T.',
+    photo: 'lab',
+    alt: 'Sampel darah di mesin sentrifus laboratorium',
   },
   {
-    icon: '💉',
     name: 'Vaksinasi & Imunisasi',
-    meta: 'Vaksin anak (IDAI) · Dewasa & lansia · Travel vaccine',
-    photo: 'https://images.unsplash.com/photo-1576671081837-49000212a370?w=600&q=80',
+    meta: 'Jadwal IDAI',
+    text: 'Vaksin anak sesuai jadwal IDAI, vaksin dewasa dan lansia, serta vaksin perjalanan seperti yellow fever.',
+    photo: 'vaksin',
+    alt: 'Perawat menyuntikkan vaksin ke lengan pasien',
   },
   {
-    icon: '🏃',
     name: 'Medical Check-Up',
-    meta: 'General · Eksekutif · Pre-employment · Pre-marriage · Pediatrik',
-    photo: 'https://images.unsplash.com/photo-1666214280391-8ff5bd3c0bf0?w=600&q=80',
+    meta: 'Mulai Rp 450 ribu',
+    text: 'Paket general health dan eksekutif, pre-employment, pre-marriage, atau paket yang Anda susun sendiri.',
+    photo: 'mcu-cek',
+    alt: 'Dokter melakukan pemeriksaan pada pasien',
   },
 ];
