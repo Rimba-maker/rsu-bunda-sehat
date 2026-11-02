@@ -1,0 +1,178 @@
+---
+import { site } from '../../data/site';
+
+const letters = 'BUNDASEHAT'.split('');
+// Arches of different height (60–100%), bottoms on one line, 4px apart.
+const heights = [86, 100, 72, 94, 64, 90, 78, 100, 68, 88];
+
+const cols = [
+  { title: 'Layanan', links: [['Rawat jalan', '#layanan'], ['Rawat inap', '#layanan'], ['IGD 24 jam', '#layanan'], ['Medical check-up', '#mcu']] },
+  { title: 'Rumah sakit', links: [['Dokter spesialis', '#dokter'], ['Fasilitas', '#fasilitas'], ['Asuransi & BPJS', '#mcu'], ['Karir', '#kontak']] },
+  { title: 'Bantuan', links: [['Buat janji temu', '#janji'], ['Pengaduan pasien', '#kontak'], ['Donasi', '#kontak'], ['CSR', '#kontak']] },
+  { title: 'Ikuti kami', links: [['Instagram ' + site.instagram, 'https://instagram.com/rsubundasehat'], ['Facebook', '#'], ['YouTube edukasi kesehatan', '#']] },
+];
+---
+<footer class="foot">
+  <div class="wrap">
+    <p class="foot__tag lead">{site.footerTagline}</p>
+
+    <div class="mark" role="img" aria-label="Bunda Sehat">
+      {
+        letters.map((l, i) => (
+          <span class="mark__a" style={`--h:${heights[i]}%`} aria-hidden="true">
+            <span class="mark__l">{l}</span>
+          </span>
+        ))
+      }
+    </div>
+
+    <div class="foot__grid">
+      <nav class="foot__cols" aria-label="Tautan footer">
+        {
+          cols.map((c) => (
+            <div>
+              <h2 class="foot__h">{c.title}</h2>
+              <ul>
+                {c.links.map(([label, href]) => (
+                  <li><a href={href}>{label}</a></li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </nav>
+      <address class="foot__addr">
+        <p><strong>{site.name}</strong><br />{site.address}</p>
+        <p>
+          IGD <a href="tel:+62215551888">{site.emergency}</a><br />
+          Informasi <a href="tel:+62215551999">{site.info}</a>
+        </p>
+        <p class="foot__acc">Akreditasi Paripurna KARS 2024 · ISO 9001:2015 · ISO 14001 · Berizin Kemenkes RI dan Pemda DKI Jakarta</p>
+      </address>
+    </div>
+
+    <div class="foot__base">
+      <p class="small">© {new Date().getFullYear()} {site.name}. Foto: Pexels, lisensi bebas pakai. Data dokter, jadwal dan harga pada halaman ini adalah contoh.</p>
+      <a href="#top" class="btn foot__top">Ke atas</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .foot {
+    background: var(--surface);
+    padding-block: clamp(48px, 6vw, 96px) 28px;
+  }
+  .foot__tag {
+    margin-bottom: clamp(28px, 4vw, 56px);
+    max-width: 22ch;
+  }
+  .mark {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    height: clamp(180px, 34svh, 340px);
+  }
+  .mark__a {
+    flex: 1 1 0;
+    min-width: 0;
+    height: var(--h);
+    display: grid;
+    place-items: end center;
+    padding-bottom: 8%;
+    background: var(--ink);
+    border-radius: 999px 999px 0 0;
+    color: var(--surface);
+    overflow: hidden;
+    transition: transform 0.6s var(--ease);
+  }
+  .mark__a:hover {
+    transform: translateY(-8px);
+  }
+  .mark__l {
+    font-size: var(--step-display);
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+  }
+  .foot__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+    gap: 48px;
+    margin-top: clamp(40px, 5vw, 72px);
+  }
+  .foot__cols {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px 24px;
+  }
+  .foot__h {
+    font-size: var(--step-body);
+    font-weight: 600;
+    letter-spacing: 0;
+    margin-bottom: 14px;
+  }
+  .foot ul {
+    display: grid;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: var(--step-body);
+  }
+  .foot a {
+    text-underline-offset: 0.25em;
+  }
+  .foot__addr {
+    display: grid;
+    gap: 16px;
+    font-style: normal;
+    font-size: var(--step-body);
+  }
+  .foot__acc {
+    color: var(--muted);
+  }
+  .foot__base {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-top: clamp(40px, 5vw, 72px);
+  }
+  .foot__base p {
+    max-width: 70ch;
+    color: var(--muted);
+  }
+  .foot__top {
+    min-height: 46px;
+    font-size: var(--step-body);
+  }
+  @media (max-width: 900px) {
+    .foot__grid {
+      grid-template-columns: 1fr;
+    }
+    .foot__cols {
+      grid-template-columns: 1fr 1fr;
+    }
+    .mark {
+      flex-wrap: wrap;
+      height: auto;
+      gap: 4px;
+    }
+    .mark__a {
+      flex: 0 0 calc(20% - 4px);
+      height: auto;
+      aspect-ratio: 1 / 1.35;
+    }
+    .mark__a:nth-child(n + 6) {
+      aspect-ratio: 1 / 1.2;
+    }
+    .mark__l {
+      font-size: var(--step-head);
+    }
+    .foot__base {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>
