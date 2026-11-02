@@ -1,0 +1,103 @@
+---
+import { site } from '../../data/site';
+---
+<div class="topbar on-ink">
+  <div class="wrap topbar__in">
+    <p class="topbar__sos">
+      <span class="topbar__dot" aria-hidden="true"></span>
+      <span>IGD 24 jam</span>
+      <a href={`tel:${site.emergencyShort}`}><strong>{site.emergencyShort}</strong></a>
+      <span class="topbar__or">atau</span>
+      <a href="tel:+62215551888"><strong>{site.emergency}</strong></a>
+    </p>
+    <p class="topbar__live" id="poli-status" aria-live="polite">
+      Poliklinik Senin–Sabtu 07.00–21.00, Minggu 08.00–15.00
+    </p>
+  </div>
+</div>
+
+<style>
+  .topbar {
+    background: var(--ink);
+    color: var(--bg);
+    font-size: var(--step-small);
+  }
+  .topbar__in {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    min-height: 44px;
+    padding-block: 6px;
+  }
+  .topbar__sos {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px 10px;
+  }
+  .topbar__sos a {
+    text-decoration: none;
+  }
+  .topbar__sos strong {
+    font-weight: 600;
+  }
+  .topbar__or {
+    opacity: 0.75;
+  }
+  .topbar__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--bg);
+    animation: slow-pulse 2.8s ease-in-out infinite;
+  }
+  .topbar__live {
+    text-align: right;
+  }
+  @keyframes slow-pulse {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.5);
+      opacity: 0.45;
+    }
+  }
+  @media (max-width: 760px) {
+    .topbar__live {
+      display: none;
+    }
+    .topbar__in {
+      justify-content: center;
+    }
+  }
+</style>
+
+<script>
+  import { poliHours } from '../../data/site';
+
+  const el = document.getElementById('poli-status');
+  if (el) {
+    const fmt = new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'Asia/Jakarta',
+      weekday: 'short',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+    });
+    const parts = Object.fromEntries(fmt.formatToParts(new Date()).map((p) => [p.type, p.value]));
+    const dayIndex = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(parts.weekday);
+    const now = Number(parts.hour) * 60 + Number(parts.minute);
+    const [open, close] = poliHours[dayIndex];
+    const t = (m: number) => `${String(Math.floor(m / 60)).padStart(2, '0')}.${String(m % 60).padStart(2, '0')}`;
+    el.textContent =
+      now >= open && now < close
+        ? `Poliklinik buka sekarang, sampai pukul ${t(close)} WIB`
+        : now < open
+          ? `Poliklinik buka hari ini pukul ${t(open)} WIB`
+          : 'Poliklinik tutup, IGD tetap melayani 24 jam';
+  }
+</script>
