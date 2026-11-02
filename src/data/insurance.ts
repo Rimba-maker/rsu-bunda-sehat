@@ -1,28 +1,24 @@
-export interface InsurancePartner {
-  name: string;
-  featured?: boolean;
-}
-
-export const partners: InsurancePartner[] = [
-  { name: 'BPJS Kesehatan', featured: true },
-  { name: 'Allianz' },
-  { name: 'AXA Mandiri' },
-  { name: 'Cigna' },
-  { name: 'Prudential' },
-  { name: 'Sun Life' },
-  { name: 'Manulife' },
-  { name: 'AIA' },
-  { name: 'FWD' },
-  { name: 'Generali' },
-  { name: 'BNI Life' },
-  { name: 'Astra Life' },
-  { name: 'Sequislife' },
-  { name: 'Tugu Ins.' },
+export const insurers = [
+  'BPJS Kesehatan',
+  'Allianz',
+  'AXA',
+  'Cigna',
+  'Mandiri Inhealth',
+  'Prudential',
+  'Sequislife',
+  'Sun Life',
+  'Manulife',
+  'Tugu Insurance',
+  'BNI Life',
+  'FWD',
+  'AIA',
+  'Generali',
+  'Astra Life',
 ];
 
-export const paymentMethods = [
-  '✅ BPJS Kesehatan (rujukan)',
-  '✅ Cashless 20+ asuransi swasta',
-  '✅ Reimbursement dokumen lengkap',
-  '✅ Transfer · Debit · Kredit · QRIS',
+export const payments = [
+  { name: 'BPJS Kesehatan', note: 'FKTL, dengan surat rujukan.' },
+  { name: 'Asuransi swasta', note: 'Cashless di 20+ partner.' },
+  { name: 'Reimbursement', note: 'Seluruh dokumen kami siapkan lengkap.' },
+  { name: 'Bayar mandiri', note: 'Transfer, debit, kredit, dan QRIS.' },
 ];
