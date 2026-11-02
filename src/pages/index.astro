@@ -1,10 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import EmergencyBanner from '../components/EmergencyBanner.astro';
-import Navbar from '../components/Navbar.astro';
-import Footer from '../components/Footer.astro';
+import TopBar from '../components/layout/TopBar.astro';
+import Navbar from '../components/layout/Navbar.astro';
+import Footer from '../components/layout/Footer.astro';
 import Hero from '../components/sections/Hero.astro';
 import QuickAccess from '../components/sections/QuickAccess.astro';
+import Intro from '../components/sections/Intro.astro';
 import Services from '../components/sections/Services.astro';
 import Doctors from '../components/sections/Doctors.astro';
 import Facilities from '../components/sections/Facilities.astro';
@@ -14,17 +15,15 @@ import HealthTips from '../components/sections/HealthTips.astro';
 import PatientStories from '../components/sections/PatientStories.astro';
 import Location from '../components/sections/Location.astro';
 import BookingForm from '../components/sections/BookingForm.astro';
-import '../styles/global.css';
+import CallBand from '../components/sections/CallBand.astro';
 ---
-<BaseLayout
-  title="RSU Bunda Sehat — Rumah Sakit Umum Tipe B Jakarta Timur, 15 Spesialisasi"
-  description="Rumah sakit umum tipe B di Jakarta Timur. 15 spesialisasi, IGD 24/7, 80+ dokter spesialis. Akreditasi Paripurna KARS. BPJS & 20+ asuransi."
->
-  <EmergencyBanner />
+<BaseLayout>
+  <TopBar />
   <Navbar />
   <main>
     <Hero />
     <QuickAccess />
+    <Intro />
     <Services />
     <Doctors />
     <Facilities />
@@ -35,5 +34,10 @@ import '../styles/global.css';
     <Location />
     <BookingForm />
   </main>
+  <CallBand />
   <Footer />
+
+  <script>
+    import '../scripts/reveal';
+  </script>
 </BaseLayout>
