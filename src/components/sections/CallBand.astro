@@ -1,0 +1,87 @@
+---
+import { site } from '../../data/site';
+---
+<section aria-label="Hubungi kami">
+  <a class="call on-ink" href={site.whatsappUrl} target="_blank" rel="noopener">
+    <span class="call__top">
+      <span class="call__sentence">Tulis satu pesan di WhatsApp. Bunda siap membalas, 24 jam.</span>
+      <svg class="call__arrow" viewBox="0 0 48 48" width="48" height="48" aria-hidden="true">
+        <path d="M12 36L36 12M18 12h18v18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </span>
+    <span class="call__word">Hubungi</span>
+  </a>
+</section>
+
+<style>
+  .call {
+    position: relative;
+    display: block;
+    min-height: max(62svh, 560px);
+    padding: 28px var(--gutter) 24px;
+    background: var(--ink);
+    color: var(--bg);
+    border-radius: 999px 999px 0 0;
+    text-decoration: none;
+    overflow: hidden;
+    transition:
+      background-color 0.2s,
+      color 0.2s;
+  }
+  .call:hover,
+  .call:focus-visible {
+    background: var(--bg);
+    color: var(--ink);
+    outline-offset: -6px;
+  }
+  .call__top {
+    position: absolute;
+    top: clamp(72px, 9vw, 132px);
+    left: 0;
+    right: 0;
+    display: grid;
+    justify-items: center;
+    gap: 18px;
+    text-align: center;
+  }
+  .call__sentence {
+    max-width: 28ch;
+    font-size: var(--step-body);
+  }
+  .call__arrow {
+    transition: transform 0.5s var(--ease);
+  }
+  .call:hover .call__arrow {
+    transform: translate(8px, -8px);
+  }
+  .call__word {
+    position: absolute;
+    left: var(--gutter);
+    right: var(--gutter);
+    bottom: 0.22em;
+    font-size: clamp(4.5rem, 21.5vw, 22rem);
+    font-weight: 600;
+    letter-spacing: -0.06em;
+    line-height: 0.95;
+    text-align: center;
+    white-space: nowrap;
+  }
+  @media (max-width: 700px) {
+    .call {
+      min-height: 46svh;
+    }
+    .call__top {
+      top: 84px;
+    }
+    .call__sentence {
+      max-width: 19ch;
+    }
+    .call__arrow {
+      width: 32px;
+      height: 32px;
+    }
+    .call__word {
+      font-size: 21vw;
+    }
+  }
+</style>
