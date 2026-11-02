@@ -1,96 +1,140 @@
+export interface Specialty {
+  id: string;
+  label: string;
+}
+
+/** 15 spesialisasi sesuai PRD. */
+export const specialties: Specialty[] = [
+  { id: 'dalam', label: 'Penyakit Dalam' },
+  { id: 'kandungan', label: 'Kandungan' },
+  { id: 'anak', label: 'Anak' },
+  { id: 'bedah', label: 'Bedah Umum' },
+  { id: 'jantung', label: 'Jantung' },
+  { id: 'saraf', label: 'Saraf' },
+  { id: 'mata', label: 'Mata' },
+  { id: 'tht', label: 'THT' },
+  { id: 'kulit', label: 'Kulit' },
+  { id: 'gigi', label: 'Gigi' },
+  { id: 'jiwa', label: 'Jiwa' },
+  { id: 'paru', label: 'Paru' },
+  { id: 'ortopedi', label: 'Ortopedi' },
+  { id: 'urologi', label: 'Urologi' },
+  { id: 'anestesi', label: 'Anestesi' },
+];
+
 export interface Doctor {
   name: string;
-  title: string;
   spec: string;
   specId: string;
-  schedule: string;
-  badge: string;
+  sub: string;
+  /** 0 = Minggu … 6 = Sabtu */
+  days: number[];
+  hours: string;
   photo: string;
+  /** object-position for the 3:4 arch crop */
+  pos?: string;
+  alt: string;
 }
+
+export const dayNames = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
 
 export const doctors: Doctor[] = [
   {
     name: 'dr. Andika Pramana, Sp.PD-KGEH',
-    title: 'Konsultan',
-    spec: 'Penyakit Dalam · Gastroenterohepatologi',
+    spec: 'Penyakit Dalam',
     specId: 'dalam',
-    schedule: 'Senin, Rabu, Jumat — 09.00–14.00',
-    badge: 'Konsultan',
-    photo: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=600&q=80',
+    sub: 'Konsultan Gastroenterohepatologi',
+    days: [1, 3, 5],
+    hours: '09.00–14.00',
+    photo: 'dr-andika',
+    pos: '50% 30%',
+    alt: 'dr. Andika Pramana, spesialis penyakit dalam',
   },
   {
     name: 'dr. Sari Wulandari, Sp.A(K)',
-    title: 'Konsultan',
-    spec: 'Spesialis Anak Konsultan',
+    spec: 'Anak',
     specId: 'anak',
-    schedule: 'Selasa, Kamis — 10.00–16.00',
-    badge: 'Konsultan',
-    photo: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=600&q=80',
+    sub: 'Spesialis Anak Konsultan',
+    days: [2, 4],
+    hours: '10.00–16.00',
+    photo: 'dr-sari',
+    pos: '50% 20%',
+    alt: 'dr. Sari Wulandari, spesialis anak',
   },
   {
     name: 'dr. Reza Hartono, Sp.OG',
-    title: 'Spesialis',
-    spec: 'Kandungan & Kebidanan',
+    spec: 'Kandungan',
     specId: 'kandungan',
-    schedule: 'Senin–Sabtu — 08.00–13.00',
-    badge: 'Spesialis',
-    photo: 'https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=600&q=80',
+    sub: 'Kandungan & Kebidanan',
+    days: [1, 2, 3, 4, 5, 6],
+    hours: '08.00–13.00',
+    photo: 'dr-reza',
+    pos: '50% 20%',
+    alt: 'dr. Reza Hartono, spesialis kandungan',
   },
   {
     name: 'dr. Linda Wijaya, Sp.JP(K)',
-    title: 'Konsultan',
-    spec: 'Kardiologi Konsultan',
+    spec: 'Jantung',
     specId: 'jantung',
-    schedule: 'Rabu, Jumat — 13.00–18.00',
-    badge: 'Konsultan',
-    photo: 'https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=600&q=80',
+    sub: 'Kardiologi Konsultan',
+    days: [3, 5],
+    hours: '13.00–18.00',
+    photo: 'dr-linda',
+    pos: '78% 30%',
+    alt: 'dr. Linda Wijaya, kardiolog',
   },
   {
     name: 'dr. Bayu Setiawan, Sp.B',
-    title: 'Spesialis',
     spec: 'Bedah Umum',
     specId: 'bedah',
-    schedule: 'Senin, Selasa, Kamis — 14.00–19.00',
-    badge: 'Spesialis',
-    photo: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=600&q=80',
+    sub: 'Bedah Umum',
+    days: [1, 2, 4],
+    hours: '14.00–19.00',
+    photo: 'dr-bayu',
+    pos: '50% 20%',
+    alt: 'dr. Bayu Setiawan, spesialis bedah',
   },
   {
     name: 'dr. Maya Indriani, Sp.M',
-    title: 'Spesialis',
     spec: 'Mata',
     specId: 'mata',
-    schedule: 'Senin–Jumat — 10.00–15.00',
-    badge: 'Spesialis',
-    photo: 'https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=600&q=80',
+    sub: 'Spesialis Mata',
+    days: [1, 3, 6],
+    hours: '09.00–15.00',
+    photo: 'dr-maya',
+    pos: '50% 25%',
+    alt: 'dr. Maya Indriani, spesialis mata',
   },
   {
     name: 'dr. Daniel Kurniawan, Sp.S',
-    title: 'Spesialis',
     spec: 'Saraf',
     specId: 'saraf',
-    schedule: 'Selasa, Jumat — 09.00–14.00',
-    badge: 'Spesialis',
-    photo: 'https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=600&q=80',
+    sub: 'Spesialis Saraf',
+    days: [2, 4, 5],
+    hours: '15.00–20.00',
+    photo: 'dr-daniel',
+    pos: '50% 15%',
+    alt: 'dr. Daniel Kurniawan, spesialis saraf',
   },
   {
     name: 'dr. Nina Hartati, Sp.KK',
-    title: 'Spesialis',
-    spec: 'Kulit & Kelamin',
+    spec: 'Kulit',
     specId: 'kulit',
-    schedule: 'Rabu, Sabtu — 11.00–16.00',
-    badge: 'Spesialis',
-    photo: 'https://images.unsplash.com/photo-1527613426441-4da17471b66d?w=600&q=80',
+    sub: 'Kulit & Kelamin',
+    days: [1, 2, 3, 4, 5],
+    hours: '10.00–17.00',
+    photo: 'dr-nina',
+    pos: '50% 25%',
+    alt: 'dr. Nina Hartati, spesialis kulit dan kelamin',
   },
 ];
 
-export const specializations = [
-  { id: 'all',       label: 'Semua' },
-  { id: 'dalam',     label: 'Penyakit Dalam' },
-  { id: 'anak',      label: 'Anak' },
-  { id: 'kandungan', label: 'Kandungan' },
-  { id: 'jantung',   label: 'Jantung' },
-  { id: 'bedah',     label: 'Bedah' },
-  { id: 'saraf',     label: 'Saraf' },
-  { id: 'mata',      label: 'Mata' },
-  { id: 'kulit',     label: 'Kulit' },
-];
+export const scheduleLabel = (d: Doctor) => {
+  const days = [...d.days];
+  const consecutive = days.every((v, i) => i === 0 || v === days[i - 1] + 1);
+  const label =
+    days.length >= 3 && consecutive
+      ? `${dayNames[days[0]]}–${dayNames[days[days.length - 1]]}`
+      : days.map((n) => dayNames[n]).join(', ');
+  return `${label} · ${d.hours}`;
+};

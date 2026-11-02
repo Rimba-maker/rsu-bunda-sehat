@@ -1,109 +1,310 @@
 ---
-import { doctors, specializations } from '../../data/doctors';
+import { img } from '../../lib/assets';
+import { doctors, specialties, scheduleLabel, dayNames } from '../../data/doctors';
+import { site } from '../../data/site';
 ---
-<section class="section" id="dokter">
-  <div class="container">
-    <h2 class="section-title reveal">Tim Dokter Spesialis</h2>
-    <p class="section-sub reveal">80+ dokter spesialis bersertifikat siap melayani Anda.</p>
+<section class="docs section" id="dokter" aria-labelledby="docs-title">
+  <div class="wrap">
+    <header class="docs__head">
+      <h2 id="docs-title" class="reveal">Tim dokter spesialis</h2>
+      <p class="docs__sub reveal" style="--i:1">80+ dokter spesialis bersertifikat siap melayani Anda. Pilih spesialisasi, atau lihat siapa yang praktik hari ini.</p>
+    </header>
 
-    <!-- Filter chips -->
-    <div class="filter-strip reveal" id="filterStrip">
-      {specializations.map((s) => (
-        <button
-          class:list={['filter-chip', s.id === 'all' && 'active']}
-          data-spec={s.id}
-        >
-          {s.label}
-        </button>
-      ))}
-    </div>
+    <form class="docs__filters reveal" style="--i:2" id="finder" aria-label="Filter dokter" onsubmit="return false">
+      <div class="docs__row">
+        <label class="sr-only" for="d-q">Cari nama dokter</label>
+        <input class="field" id="d-q" type="search" placeholder="Cari nama dokter" autocomplete="off" />
+        <label class="sr-only" for="d-day">Hari praktik</label>
+        <select class="field" id="d-day">
+          <option value="">Hari apa saja</option>
+          <option value="today">Praktik hari ini</option>
+          {dayNames.map((d, i) => <option value={String(i)}>{d}</option>)}
+        </select>
+      </div>
+      <div class="chips" role="group" aria-label="Spesialisasi">
+        {specialties.map((s) => <button type="button" class="chip" data-spec={s.id} aria-pressed="false">{s.label}</button>)}
+      </div>
+    </form>
 
-    <!-- Doctor grid -->
-    <div class="grid" id="doctorGrid">
-      {doctors.map((d) => (
-        <div class="card card-hover reveal" data-spec={d.specId}>
-          <div
-            class="photo"
-            style={`background-image: url('${d.photo}')`}
-            role="img"
-            aria-label={`Foto ${d.name}`}
+    <p class="docs__count" id="d-count" aria-live="polite">Menampilkan {doctors.length} dokter</p>
+
+    <ul class="docs__grid" id="d-grid">
+      {
+        doctors.map((d, i) => (
+          <li
+            class="doc reveal"
+            style={`--i:${i % 4}`}
+            data-spec={d.specId}
+            data-name={d.name.toLowerCase()}
+            data-days={d.days.join(',')}
           >
-            <span class="badge">{d.badge}</span>
-          </div>
-          <div class="body">
-            <div class="top">
-              <div class="name">{d.name}</div>
-              <div class="spec">{d.spec}</div>
+            <div class="doc__photo arch">
+              <img src={img(d.photo)} alt={d.alt} width="600" height="800" loading="lazy" style={`object-position:${d.pos ?? '50% 25%'}`} />
             </div>
-            <div class="bottom">
-              <div class="schedule">⏰ {d.schedule}</div>
-              <a href="#booking" class="btn-book">Buat Janji</a>
-            </div>
-          </div>
-        </div>
-      ))}
+            <p class="doc__today" hidden>Praktik hari ini</p>
+            <h3 class="doc__name">{d.name}</h3>
+            <p class="doc__spec">{d.sub.toLowerCase().includes(d.spec.toLowerCase()) ? d.sub : `${d.spec} · ${d.sub}`}</p>
+            <p class="doc__time">{scheduleLabel(d)}</p>
+            <a class="doc__cta" href="#janji" data-doctor={d.name} data-spec-label={d.spec}>Buat janji</a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="docs__empty" id="d-empty" hidden>
+      <p class="lead">Jadwal dokter untuk pilihan ini sedang kami perbarui.</p>
+      <p>
+        Hubungi kami di <a href="tel:+62215551999">{site.info}</a> atau <a href={site.whatsappUrl} target="_blank" rel="noopener">WhatsApp</a>,
+        dan kami carikan dokter dan jadwal yang paling cepat.
+      </p>
+      <button type="button" class="btn" id="d-reset">Tampilkan semua dokter</button>
     </div>
   </div>
 </section>
 
 <style>
-  .filter-strip { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
-
-  .grid {
+  .docs {
+    background: var(--surface);
+  }
+  .docs__head {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: 1fr 1fr;
+    gap: 24px 48px;
+    align-items: end;
+    margin-bottom: clamp(28px, 4vw, 48px);
+  }
+  .docs__sub {
+    max-width: 46ch;
+    color: var(--ink);
+  }
+  .docs__filters {
+    display: grid;
     gap: 16px;
   }
-  .card {
-    border-radius: var(--radius-md);
-    overflow: hidden;
-    background: var(--color-canvas);
-    border: 1px solid var(--color-hairline-soft);
+  .docs__row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 260px);
+    gap: 10px;
+    max-width: 760px;
+  }
+  .chips {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 8px;
   }
-  .photo {
-    width: 100%; aspect-ratio: 3/4;
-    background-size: cover; background-position: center top;
-    background-color: var(--color-surface-mid);
-    position: relative;
+  .chip {
+    min-height: 42px;
+    padding: 0.4em 1.15em;
+    border: 0;
+    border-radius: var(--arch-btn);
+    background: var(--bg-hi);
+    color: var(--ink);
+    font: 500 var(--step-body)/1 var(--font);
+    cursor: pointer;
+    transition:
+      background-color 0.25s,
+      color 0.25s,
+      transform 0.3s var(--ease);
   }
-  /* Airbnb guest-favorite-badge pattern */
-  .badge {
-    position: absolute; top: 10px; left: 10px;
-    background: #fff;
-    color: var(--color-ink);
-    font-size: 10px; font-weight: 600;
-    padding: 4px 10px;
-    border-radius: 9999px;
-    box-shadow: 0 1px 4px rgba(0,0,0,.14);
+  .chip:hover {
+    transform: translateY(-2px);
   }
-  .body     { padding: 14px 16px 16px; display: flex; flex-direction: column; flex: 1; }
-  .top      { flex: 1; }
-  .bottom   { margin-top: auto; padding-top: 12px; }
-  .name     { font-size: 14px; font-weight: 600; color: var(--color-ink); line-height: 1.3; margin-bottom: 4px; }
-  .spec     { font-size: 13px; color: var(--color-muted); margin-bottom: 0; }
-  .schedule { font-size: 12px; color: var(--color-body-text); margin-bottom: 12px; }
-
-  @media (max-width: 1024px) { .grid { grid-template-columns: repeat(3, 1fr); } }
-  @media (max-width: 768px)  { .grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 480px)  { .grid { grid-template-columns: 1fr; } }
+  .chip[aria-pressed='true'] {
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .docs__count {
+    margin: 28px 0 24px;
+    font-weight: 500;
+  }
+  .docs__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(32px, 3.6vw, 52px) clamp(16px, 2vw, 28px);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .doc {
+    display: grid;
+    align-content: start;
+    gap: 4px;
+    transition:
+      opacity 0.5s var(--ease),
+      transform 0.5s var(--ease);
+  }
+  .doc[hidden] {
+    display: none;
+  }
+  .doc__photo {
+    aspect-ratio: 3 / 4;
+    margin-bottom: 14px;
+    background: var(--bg);
+    transition: transform 0.6s var(--ease);
+  }
+  .doc__photo img {
+    transition:
+      transform 1.2s var(--ease),
+      opacity 0.4s;
+  }
+  .doc:hover .doc__photo {
+    transform: translateY(-6px);
+  }
+  .doc:hover .doc__photo img {
+    transform: scale(1.06);
+    opacity: 0.94;
+  }
+  .doc__today {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: var(--step-small);
+    font-weight: 600;
+  }
+  .doc__today[hidden] {
+    display: none;
+  }
+  .doc__today::before {
+    content: '';
+    width: 9px;
+    height: 12px;
+    border-radius: 999px 999px 0 0;
+    background: var(--ink);
+    animation: slow 2.8s ease-in-out infinite;
+  }
+  @keyframes slow {
+    50% {
+      transform: scale(1.35);
+      opacity: 0.5;
+    }
+  }
+  .doc__name {
+    font-size: var(--step-body);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+  .doc__spec {
+    font-size: var(--step-body);
+  }
+  .doc__time {
+    font-size: var(--step-body);
+    color: var(--muted);
+  }
+  .doc__cta {
+    justify-self: start;
+    margin-top: 8px;
+    font-weight: 600;
+    text-underline-offset: 0.3em;
+    text-decoration-thickness: 2px;
+    transition: transform 0.35s var(--ease);
+  }
+  .doc__cta:hover {
+    transform: translateX(6px);
+  }
+  .docs__empty {
+    display: grid;
+    gap: 14px;
+    justify-items: start;
+    max-width: 52ch;
+    padding-block: 24px;
+  }
+  .docs__empty[hidden] {
+    display: none;
+  }
+  @media (max-width: 1100px) {
+    .docs__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media (max-width: 760px) {
+    .docs__head {
+      grid-template-columns: 1fr;
+    }
+    .docs__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .docs__row {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>
 
 <script>
-  const strip = document.getElementById('filterStrip');
-  const grid  = document.getElementById('doctorGrid');
+  /* The live thing: pick a specialty, a name or a day, see who practises. Day logic runs on Asia/Jakarta time. */
+  const root = document.getElementById('finder');
+  const grid = document.getElementById('d-grid');
+  if (root && grid) {
+    const q = document.getElementById('d-q') as HTMLInputElement;
+    const day = document.getElementById('d-day') as HTMLSelectElement;
+    const count = document.getElementById('d-count')!;
+    const empty = document.getElementById('d-empty')!;
+    const chips = [...root.querySelectorAll<HTMLButtonElement>('.chip')];
+    const docs = [...grid.querySelectorAll<HTMLElement>('.doc')];
+    const active = new Set<string>();
 
-  strip?.addEventListener('click', (e) => {
-    const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('.filter-chip');
-    if (!btn) return;
+    const weekday = () =>
+      ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(
+        new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Jakarta', weekday: 'short' }).format(new Date()),
+      );
+    const today = weekday();
 
-    strip.querySelectorAll('.filter-chip').forEach((c) => c.classList.remove('active'));
-    btn.classList.add('active');
-
-    const spec = btn.dataset.spec ?? 'all';
-    grid?.querySelectorAll<HTMLElement>('[data-spec]').forEach((card) => {
-      card.style.display = (spec === 'all' || card.dataset.spec === spec) ? '' : 'none';
+    // Mark who practises today.
+    docs.forEach((d) => {
+      const days = (d.dataset.days || '').split(',').map(Number);
+      const flag = d.querySelector<HTMLElement>('.doc__today');
+      if (flag && days.includes(today)) flag.hidden = false;
     });
-  });
+
+    const apply = () => {
+      const term = q.value.trim().toLowerCase();
+      const want = day.value === 'today' ? today : day.value === '' ? -1 : Number(day.value);
+      let shown = 0;
+      docs.forEach((d) => {
+        const days = (d.dataset.days || '').split(',').map(Number);
+        const ok =
+          (active.size === 0 || active.has(d.dataset.spec!)) &&
+          (!term || d.dataset.name!.includes(term)) &&
+          (want < 0 || days.includes(want));
+        d.hidden = !ok;
+        if (ok) shown++;
+      });
+      count.textContent = shown ? `Menampilkan ${shown} dokter` : 'Tidak ada dokter yang cocok';
+      empty.hidden = shown !== 0;
+      chips.forEach((c) => c.setAttribute('aria-pressed', String(active.has(c.dataset.spec!))));
+    };
+
+    chips.forEach((c) =>
+      c.addEventListener('click', () => {
+        const id = c.dataset.spec!;
+        active.has(id) ? active.delete(id) : active.add(id);
+        apply();
+      }),
+    );
+    q.addEventListener('input', apply);
+    day.addEventListener('change', apply);
+    document.getElementById('d-reset')?.addEventListener('click', () => {
+      active.clear();
+      q.value = '';
+      day.value = '';
+      apply();
+    });
+
+    // Values arriving from the hero search.
+    window.addEventListener('finder:set', (e) => {
+      const { spec, q: name, day: d } = (e as CustomEvent).detail as { spec: string; q: string; day: string };
+      active.clear();
+      if (spec) active.add(spec);
+      q.value = name;
+      day.value = d;
+      apply();
+    });
+
+    // "Buat janji" hands the chosen doctor to the booking coupon.
+    grid.addEventListener('click', (e) => {
+      const a = (e.target as HTMLElement).closest<HTMLAnchorElement>('.doc__cta');
+      if (!a) return;
+      window.dispatchEvent(new CustomEvent('booking:set', { detail: { doctor: a.dataset.doctor, spec: a.dataset.specLabel } }));
+    });
+  }
 </script>
