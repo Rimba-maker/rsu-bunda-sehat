@@ -1,45 +1,68 @@
 export interface Facility {
-  icon: string;
+  id: string;
   name: string;
-  desc: string;
+  lines: string[];
   photo: string;
+  alt: string;
+  pos?: string;
 }
 
 export const facilities: Facility[] = [
   {
-    icon: '🛏️',
-    name: 'Kamar Rawat Inap',
-    desc: 'VVIP king-size bed + sofa keluarga · VIP & Kelas 1–3 · AC semua kelas · BPJS-friendly',
-    photo: 'https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=800&q=80',
+    id: 'kamar',
+    name: 'Kamar rawat inap',
+    lines: [
+      'VVIP: tempat tidur king-size, sofa keluarga, kulkas, TV 50"',
+      'VIP: single bed, sofa, kulkas, TV',
+      'Kelas 1: 2 tempat tidur per kamar, AC, TV',
+      'Kelas 2 & 3: ramah BPJS, ber-AC',
+    ],
+    photo: 'kamar-vip',
+    alt: 'Kamar rawat inap terang dengan jendela besar',
+    pos: '50% 60%',
   },
   {
-    icon: '🔬',
-    name: 'Diagnostic Center',
-    desc: 'MRI 1.5T Siemens · CT-Scan 128 slice · USG 4D Doppler · Mammografi · Endoscopy',
-    photo: 'https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=800&q=80',
+    id: 'diagnostik',
+    name: 'Modern diagnostic center',
+    lines: ['MRI 1.5T Siemens', 'CT-Scan 128 slice', 'USG 4D Doppler', 'Mammografi & bone densitometry', 'Endoscopy suite'],
+    photo: 'radiologi-mri',
+    alt: 'Pasien menjalani pemeriksaan MRI',
+    pos: '50% 40%',
   },
   {
-    icon: '🚑',
-    name: 'IGD Fully Equipped',
-    desc: '8 bed observasi · 2 trauma bay · Resuscitation room · Helipad rooftop',
-    photo: 'https://images.unsplash.com/photo-1551076805-e1869033e561?w=800&q=80',
+    id: 'igd',
+    name: 'IGD fully equipped',
+    lines: ['8 bed observasi', '2 trauma bay', 'Resuscitation room', 'Helipad emergency di rooftop'],
+    photo: 'igd-paramedis',
+    alt: 'Paramedis mendorong brankar menuju IGD',
+    pos: '50% 35%',
   },
   {
-    icon: '🤰',
-    name: 'Birth Center',
-    desc: '6 labor room · 2 OK obstetri · NICU 12 bed (level 3) · Bonding suite',
-    photo: 'https://images.unsplash.com/photo-1631815589968-fdb09a223b1e?w=800&q=80',
+    id: 'birth',
+    name: 'Birth center',
+    lines: ['6 labor room', '2 kamar operasi obstetri', 'NICU 12 bed (level 3)', 'Bonding suite'],
+    photo: 'nicu',
+    alt: 'Bayi di dalam inkubator NICU',
+    pos: '50% 50%',
   },
   {
-    icon: '❤️',
-    name: 'Cath Lab & ICU',
-    desc: 'ICU 16 bed · CCU 8 bed · HCU 12 bed · Hemodialisis 20 unit',
-    photo: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=800&q=80',
+    id: 'cathlab',
+    name: 'Cath lab & ICU',
+    lines: ['Cath lab untuk PCI dan EP study', 'ICU 16 bed, CCU 8 bed', 'HCU 12 bed', 'Hemodialisis 20 unit'],
+    photo: 'icu-monitor',
+    alt: 'Monitor tanda vital di ruang ICU',
+    pos: '50% 40%',
   },
   {
-    icon: '🍃',
-    name: 'Healing Environment',
-    desc: 'Taman therapeutic · Kantin keluarga · Mushola · Free Wi-Fi · Parkir 500 mobil',
-    photo: 'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80',
+    id: 'taman',
+    name: 'Healing environment',
+    lines: [
+      'Kantin keluarga, mushola, taman terapeutik',
+      'Wi-Fi gratis, parkir 500 mobil',
+      'Kafe dan toko buku',
+    ],
+    photo: 'taman',
+    alt: 'Tiga ibu lansia berjalan di taman yang teduh',
+    pos: '50% 50%',
   },
 ];
