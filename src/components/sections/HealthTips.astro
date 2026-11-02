@@ -1,91 +1,115 @@
 ---
-const articles = [
-  {
-    tag: 'Kesehatan Anak',
-    title: 'Kapan Sebaiknya Anak Pertama Kali Cek Mata?',
-    author: 'dr. Maya Indriani, Sp.M',
-    readTime: '4 menit baca',
-    photo: 'https://images.unsplash.com/photo-1512069772995-ec65ed45afd6?w=800&q=80',
-  },
-  {
-    tag: 'Penyakit Metabolik',
-    title: 'Mengenal Gejala Awal Diabetes Tipe 2 — Jangan Diabaikan',
-    author: 'dr. Andika Pramana, Sp.PD',
-    readTime: '6 menit baca',
-    photo: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=800&q=80',
-  },
-  {
-    tag: 'Preventif',
-    title: 'Panduan MCU Tahunan: Apa yang Harus Dicek Sesuai Usia?',
-    author: 'Tim Dokter RSU Bunda Sehat',
-    readTime: '5 menit baca',
-    photo: 'https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=800&q=80',
-  },
-] as const;
+import { img } from '../../lib/assets';
+import { tips } from '../../data/content';
 ---
-<section class="section" id="tips">
-  <div class="container">
-    <div class="header">
-      <div>
-        <h2 class="section-title reveal">Tips Kesehatan</h2>
-        <p class="section-sub reveal" style="margin-bottom:0">Dari dokter spesialis RSU Bunda Sehat untuk Anda.</p>
-      </div>
-      <a href="#" class="btn-secondary reveal">Lihat semua artikel →</a>
-    </div>
+<section class="tips section" aria-labelledby="tips-title">
+  <div class="wrap">
+    <header class="tips__head">
+      <h2 id="tips-title" class="reveal">Tips kesehatan</h2>
+      <p class="reveal" style="--i:1">Ditulis oleh dokter kami, dengan bahasa yang bisa langsung Anda praktikkan di rumah.</p>
+    </header>
 
-    <div class="grid">
-      {articles.map((a) => (
-        <a href="#" class="card card-hover reveal">
-          <div class="photo" style={`background-image: url('${a.photo}')`} role="img" aria-label={a.title}></div>
-          <div class="body">
-            <span class="tag">{a.tag}</span>
-            <div class="title">{a.title}</div>
-            <div class="meta">
-              <span>{a.author}</span>
-              <span>· {a.readTime}</span>
-            </div>
-          </div>
-        </a>
-      ))}
-    </div>
+    <ul class="tips__row">
+      {
+        tips.map((t, i) => (
+          <li class:list={['tip', 'reveal', `tip--${i + 1}`]} style={`--i:${i}`}>
+            <a href={t.href} class="tip__link">
+              <span class="tip__photo arch">
+                <img src={img(t.photo)} alt={t.alt} width="640" height="800" loading="lazy" />
+              </span>
+              <span class="tip__title">{t.title}</span>
+              <span class="tip__by small">{t.by} · {t.read} baca</span>
+              <span class="tip__more">Baca artikel</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
   </div>
 </section>
 
 <style>
-  .header {
-    display: flex; justify-content: space-between; align-items: flex-end;
-    flex-wrap: wrap; gap: 16px;
-    margin-bottom: 36px;
+  .tips {
+    background: var(--surface);
   }
-  .grid {
+  .tips__head {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px 48px;
+    align-items: end;
+    margin-bottom: clamp(36px, 5vw, 64px);
+  }
+  .tips__head p {
+    max-width: 44ch;
+  }
+  .tips__row {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: clamp(20px, 3vw, 48px);
+    margin: 0;
+    padding: 0 0 clamp(0px, 8vw, 128px);
+    list-style: none;
+    align-items: start;
   }
-  .card {
-    display: block;
-    border-radius: var(--radius-md);
-    overflow: hidden;
-    background: var(--color-canvas);
-    border: 1px solid var(--color-hairline-soft);
+  /* A staircase, not a row of identical cards. */
+  .tip--2 {
+    margin-top: clamp(0px, 5vw, 80px);
   }
-  .photo {
-    width: 100%; aspect-ratio: 16/9;
-    background-size: cover; background-position: center;
-    background-color: var(--color-surface-mid);
+  .tip--3 {
+    margin-top: clamp(0px, 10vw, 160px);
   }
-  .body { padding: 18px 20px 20px; }
-  .tag {
-    display: inline-block;
-    background: var(--color-primary-muted);
-    color: var(--color-primary);
-    font-size: 11px; font-weight: 600;
-    padding: 3px 10px;
-    border-radius: 9999px;
-    margin-bottom: 10px;
+  .tip__link {
+    display: grid;
+    gap: 10px;
+    text-decoration: none;
   }
-  .title { font-size: 15px; font-weight: 600; color: var(--color-ink); line-height: 1.45; margin-bottom: 10px; }
-  .meta  { font-size: 12px; color: var(--color-muted-soft); display: flex; gap: 6px; flex-wrap: wrap; }
-
-  @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+  .tip__photo {
+    aspect-ratio: 4 / 5;
+    margin-bottom: 8px;
+    background: var(--bg);
+  }
+  .tip__photo img {
+    transition: transform 1.4s var(--ease);
+  }
+  .tip__link:hover .tip__photo img {
+    transform: scale(1.07);
+  }
+  .tip__title {
+    font-size: var(--step-lead);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.14;
+    text-wrap: balance;
+  }
+  .tip__by {
+    color: var(--muted);
+    font-size: var(--step-small);
+  }
+  .tip__more {
+    justify-self: start;
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.3em;
+    transition: transform 0.35s var(--ease);
+  }
+  .tip__link:hover .tip__more {
+    transform: translateX(6px);
+  }
+  @media (max-width: 860px) {
+    .tips__head {
+      grid-template-columns: 1fr;
+    }
+    .tips__row {
+      grid-template-columns: 1fr;
+      gap: 44px;
+    }
+    .tip--2,
+    .tip--3 {
+      margin-top: 0;
+    }
+    .tip__photo {
+      aspect-ratio: 5 / 4;
+    }
+  }
 </style>
