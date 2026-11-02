@@ -1,41 +1,69 @@
 ---
+import { img } from '../../lib/assets';
+import { specialties, dayNames } from '../../data/doctors';
+import { site } from '../../data/site';
+
+const slides = [
+  { src: 'hero-keluarga', alt: 'Seorang ibu memeluk kedua anaknya di depan pintu biru', pos: '50% 40%' },
+  { src: 'hero-anak', alt: 'Dokter anak memeriksa detak jantung seorang anak dengan stetoskop', pos: '50% 35%' },
+  { src: 'hero-ibu-bayi', alt: 'Ibu tersenyum bersama bayinya yang baru lahir', pos: '40% 50%' },
+  { src: 'hero-lansia', alt: 'Perawat berbincang dengan pasien lansia di ruang periksa', pos: '70% 40%' },
+];
 ---
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-content">
-    <h1>Kesehatan Keluarga Anda,<br />Prioritas Kami.</h1>
-    <p>
-      Rumah sakit umum tipe B dengan 15 spesialisasi, 250 tempat tidur,<br />
-      dan layanan 24/7 di Jakarta Timur. Akreditasi Paripurna KARS 2024.
-    </p>
-
-    <!-- Pill Search Bar (Airbnb pattern) -->
-    <div class="search-pill">
-      <div class="seg">
-        <div class="seg-label">Spesialisasi</div>
-        <div class="seg-val">Cari spesialisasi...</div>
-      </div>
-      <div class="seg">
-        <div class="seg-label">Tanggal</div>
-        <div class="seg-val">Pilih tanggal</div>
-      </div>
-      <div class="seg no-border">
-        <div class="seg-label">Nama Dokter</div>
-        <div class="seg-val">Opsional</div>
-      </div>
-      <button class="search-orb" aria-label="Cari dokter">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-        </svg>
-      </button>
+<section class="hero" aria-labelledby="hero-title" id="konten">
+  <div class="hero__stage" aria-hidden="false">
+    <div class="hero__photo arch" data-slides>
+      {
+        slides.map((s, i) => (
+          <img
+            src={img(s.src)}
+            alt={s.alt}
+            width="1200"
+            height="1500"
+            class:list={[{ 'is-on': i === 0 }]}
+            style={`object-position:${s.pos}`}
+            loading={i === 0 ? 'eager' : 'lazy'}
+            fetchpriority={i === 0 ? 'high' : 'auto'}
+            decoding="async"
+          />
+        ))
+      }
     </div>
+  </div>
 
-    <!-- Trust Badges (Airbnb guest-favorite pattern) -->
-    <div class="trust-row">
-      <span class="trust-badge">✅ KARS Paripurna 2024</span>
-      <span class="trust-badge">✅ Terdaftar BPJS</span>
-      <span class="trust-badge">✅ 20+ Asuransi Partner</span>
-      <span class="trust-badge">✅ ISO 9001:2015</span>
+  <div class="wrap hero__in">
+    <div class="hero__copy">
+      <h1 id="hero-title" class="reveal">Keluarga Anda, prioritas kami.</h1>
+      <p class="hero__sub reveal" style="--i:1">
+        {site.name} adalah rumah sakit umum tipe B di Jakarta Timur: 15 spesialisasi, 250 tempat tidur, dan IGD
+        yang tidak pernah tutup. Akreditasi Paripurna KARS 2024.
+      </p>
+
+      <form class="finder reveal" style="--i:2" id="finder-hero" action="#dokter" aria-label="Cari dokter">
+        <p class="finder__title">Cari dokter</p>
+        <label class="sr-only" for="f-spec">Spesialisasi</label>
+        <select class="field finder__spec" id="f-spec" name="spec">
+          <option value="">Semua spesialisasi</option>
+          {specialties.map((s) => <option value={s.id}>{s.label}</option>)}
+        </select>
+        <label class="sr-only" for="f-q">Nama dokter</label>
+        <input class="field" id="f-q" name="q" type="search" placeholder="Nama dokter" autocomplete="off" />
+        <label class="sr-only" for="f-day">Hari praktik</label>
+        <select class="field" id="f-day" name="day">
+          <option value="">Hari apa saja</option>
+          <option value="today">Praktik hari ini</option>
+          {dayNames.map((d, i) => <option value={String(i)}>{d}</option>)}
+        </select>
+        <button class="btn finder__go" type="submit">Cari dokter</button>
+      </form>
+
+      <p class="hero__book reveal" style="--i:3">
+        Sudah tahu dokternya? <a href="#janji">Buat janji temu</a>
+      </p>
+
+      <ul class="trust reveal" style="--i:4">
+        {site.trust.map((t) => <li>{t}</li>)}
+      </ul>
     </div>
   </div>
 </section>
@@ -43,103 +71,207 @@
 <style>
   .hero {
     position: relative;
-    min-height: 520px;
-    display: flex;
-    align-items: center;
     overflow: hidden;
-    background: #1a1a1a;
-  }
-  .hero-bg {
-    position: absolute; inset: 0;
-    background-image: url('https://images.unsplash.com/photo-1504813184591-01572f98c85f?w=1920&q=80');
-    background-size: cover;
-    background-position: center 30%;
-    opacity: .28;
-  }
-  .hero-content {
-    position: relative; z-index: 1;
-    width: 100%; max-width: 780px;
-    margin: 0 auto;
-    padding: 88px 32px;
-    text-align: center;
-  }
-  h1 {
-    font-size: clamp(28px, 4vw, 46px);
-    font-weight: 700;
-    color: #fff;
-    line-height: 1.18;
-    letter-spacing: -.5px;
-    margin-bottom: 14px;
-  }
-  p {
-    font-size: 16px;
-    color: rgba(255,255,255,.8);
-    line-height: 1.7;
-    margin-bottom: 36px;
+    min-height: min(860px, calc(100svh - 120px));
+    padding-block: clamp(32px, 4vw, 56px) clamp(56px, 6vw, 88px);
   }
 
-  /* Search pill */
-  .search-pill {
-    background: #fff;
-    border-radius: 9999px;
-    padding: 6px 6px 6px 24px;
+  /* The motif once, at enormous scale: a flat aubergine arch cropped by the viewport. */
+  .hero__stage {
+    position: absolute;
+    z-index: 0;
+    top: clamp(16px, 2vw, 28px);
+    right: -7vw;
+    width: 58vw;
+    height: calc(100% + 140px);
+    padding: clamp(18px, 2.2vw, 32px);
+    background: var(--ink);
+    border-radius: var(--arch);
+  }
+
+  .hero__photo {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero__photo img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transform: scale(1.02);
+    transition: opacity 1.6s ease-in-out;
+  }
+
+  .hero__photo img.is-on {
+    opacity: 1;
+    animation: drift 14s ease-out forwards;
+  }
+
+  @keyframes drift {
+    from {
+      transform: scale(1.02);
+    }
+    to {
+      transform: scale(1.09);
+    }
+  }
+
+  .hero__in {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero__copy {
+    width: min(46vw, 760px);
+    display: grid;
+    gap: clamp(20px, 2.2vw, 32px);
+    justify-items: start;
+  }
+
+  .hero h1 {
+    font-size: var(--step-display);
+    max-width: 9.5em;
+  }
+
+  .hero__sub {
+    max-width: 44ch;
+    font-size: var(--step-body);
+  }
+
+  .finder {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+    max-width: 640px;
+    padding: 20px;
+    border-radius: var(--r);
+    background: var(--surface);
+  }
+
+  .finder__title {
+    grid-column: 1 / -1;
+    font-weight: 600;
+    font-size: var(--step-body);
+  }
+
+  .finder__spec,
+  .finder__go {
+    grid-column: 1 / -1;
+  }
+
+  .finder__go {
+    margin-top: 4px;
+  }
+
+  .hero__book a {
+    font-weight: 600;
+    text-underline-offset: 0.25em;
+    text-decoration-thickness: 2px;
+  }
+
+  .trust {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 28px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    max-width: 640px;
+    font-size: var(--step-small);
+    font-weight: 500;
+  }
+
+  .trust li {
     display: flex;
     align-items: center;
-    max-width: 650px;
-    margin: 0 auto 28px;
-    box-shadow: 0 6px 32px rgba(0,0,0,.28), 0 0 0 1px rgba(255,255,255,.06);
-  }
-  .seg {
-    flex: 1;
-    padding: 6px 16px 6px 0;
-    border-right: 1px solid var(--color-hairline);
-    text-align: left;
-  }
-  .seg.no-border { border-right: none; padding-left: 16px; padding-right: 0; }
-  .seg-label { font-size: 11px; font-weight: 600; color: var(--color-ink); margin-bottom: 2px; }
-  .seg-val   { font-size: 13px; color: var(--color-muted-soft); }
-  .search-orb {
-    background: var(--color-primary);
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    width: 50px; height: 50px;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    cursor: pointer;
-    transition: background .15s, transform .12s;
-  }
-  .search-orb:hover { background: var(--color-primary-hover); transform: scale(1.06); }
-
-  /* Trust badges */
-  .trust-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-  .trust-badge {
-    background: rgba(255,255,255,.13);
-    border: 1px solid rgba(255,255,255,.22);
-    color: #fff;
-    padding: 6px 14px;
-    border-radius: 9999px;
-    font-size: 12px;
-    font-weight: 500;
-    backdrop-filter: blur(4px);
+    gap: 10px;
   }
 
-  @media (max-width: 768px) {
-    .hero-content { padding: 64px 16px; }
-    .search-pill {
-      flex-wrap: wrap;
-      border-radius: var(--radius-md);
-      padding: 16px;
-      gap: 0;
+  .trust li::before {
+    content: '';
+    flex: none;
+    width: 11px;
+    height: 15px;
+    border-radius: 999px 999px 0 0;
+    background: var(--ink);
+  }
+
+  @media (max-width: 900px) {
+    .hero {
+      min-height: 0;
+      padding-top: 16px;
     }
-    .seg {
-      border-right: none;
-      border-bottom: 1px solid var(--color-hairline);
-      padding: 10px 0;
+    .hero__stage {
+      position: relative;
+      top: 0;
+      right: auto;
+      width: auto;
+      height: 46svh;
+      min-height: 300px;
+      max-height: 520px;
+      margin-inline: var(--gutter);
+    }
+    .hero__in {
+      margin-top: 28px;
+    }
+    .hero__copy {
       width: 100%;
     }
-    .seg.no-border { border-bottom: none; }
-    .search-orb { width: 100%; border-radius: var(--radius-sm); height: 44px; margin-top: 10px; }
-    p br { display: none; }
+    .hero h1 {
+      font-size: var(--step-display);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .finder {
+      grid-template-columns: 1fr;
+    }
+    .trust {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
+
+<script>
+  /* Slow crossfade: light shifting in a room. Pauses on hidden tab, honours reduced motion. */
+  const stage = document.querySelector<HTMLElement>('[data-slides]');
+  if (stage) {
+    const slides = [...stage.querySelectorAll<HTMLImageElement>('img')];
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let i = 0;
+    let timer: number | undefined;
+    const next = () => {
+      slides[i].classList.remove('is-on');
+      i = (i + 1) % slides.length;
+      slides[i].classList.add('is-on');
+    };
+    const start = () => {
+      if (reduce || timer) return;
+      timer = window.setInterval(next, 6200);
+    };
+    const stop = () => {
+      window.clearInterval(timer);
+      timer = undefined;
+    };
+    document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+    start();
+  }
+
+  /* The live thing, step 1: the hero search hands its values to the doctor finder. */
+  const form = document.getElementById('finder-hero') as HTMLFormElement | null;
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    window.dispatchEvent(
+      new CustomEvent('finder:set', {
+        detail: { spec: String(data.get('spec') || ''), q: String(data.get('q') || ''), day: String(data.get('day') || '') },
+      }),
+    );
+    document.getElementById('dokter')?.scrollIntoView({ behavior: 'smooth' });
+  });
+</script>
