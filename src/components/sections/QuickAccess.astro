@@ -1,67 +1,111 @@
 ---
-const cards = [
-  {
-    icon: '🩺',
-    title: 'Buat Janji Temu',
-    sub: 'Pilih dokter & jadwal online, konfirmasi dalam 1 jam kerja',
-    href: '#booking',
-    accent: true,
-  },
-  {
-    icon: '🚑',
-    title: 'Emergency IGD 24/7',
-    sub: 'Hubungi (021) 555-1888 — tim siap setiap saat',
-    href: 'tel:+62215551888',
-    accent: true,
-  },
-  {
-    icon: '🏥',
-    title: 'Medical Check-Up',
-    sub: 'Paket sehat preventif mulai Rp 850.000',
-    href: '#mcu',
-    accent: false,
-  },
-  {
-    icon: '📞',
-    title: 'Customer Care',
-    sub: 'WhatsApp 24/7 — pertanyaan & jadwal',
-    href: 'https://wa.me/6281234567890',
-    accent: false,
-  },
-] as const;
+import { img } from '../../lib/assets';
+import { site } from '../../data/site';
+
+const items = [
+  { title: 'Buat janji temu', text: 'Pilih dokter dan jadwal secara online.', href: '#janji', photo: 'janji', alt: 'Dokter berbincang dengan ibu dan anak', pos: '50% 40%' },
+  { title: 'IGD 24 jam', text: `Hotline langsung ${site.emergencyShort} atau ${site.emergency}.`, href: 'tel:+62215551888', photo: 'igd-paramedis', alt: 'Paramedis dan brankar siap di IGD', pos: '50% 30%' },
+  { title: 'Check-up rutin', text: 'Paket sehat preventif untuk semua usia.', href: '#mcu', photo: 'mcu-treadmill', alt: 'Pasien menjalani tes treadmill', pos: '50% 50%' },
+  { title: 'Customer care', text: 'WhatsApp 24 jam, dibalas oleh manusia.', href: site.whatsappUrl, photo: 'customer-care', alt: 'Petugas customer care tersenyum memakai headset', pos: '50% 30%' },
+];
 ---
-<section class="section">
-  <div class="container">
-    <div class="grid">
-      {cards.map((c) => (
-        <a href={c.href} class:list={['card card-hover reveal', c.accent && 'accent']}>
-          <div class="icon">{c.icon}</div>
-          <div class="title">{c.title}</div>
-          <div class="sub">{c.sub}</div>
-        </a>
-      ))}
-    </div>
-  </div>
+<section class="quick on-ink" aria-labelledby="quick-title">
+  <h2 id="quick-title" class="sr-only">Akses cepat</h2>
+  <ul class="wrap quick__grid">
+    {
+      items.map((it, i) => (
+        <li class="reveal" style={`--i:${i}`}>
+          <a href={it.href} class="quick__item" target={it.href.startsWith('http') ? '_blank' : undefined} rel={it.href.startsWith('http') ? 'noopener' : undefined}>
+            <span class="quick__photo arch">
+              <img src={img(it.photo)} alt={it.alt} width="240" height="300" loading="lazy" style={`object-position:${it.pos}`} />
+            </span>
+            <span class="quick__text">
+              <span class="quick__title">{it.title}</span>
+              <span class="quick__desc">{it.text}</span>
+            </span>
+            <svg class="quick__arrow" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+              <path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
 </section>
 
 <style>
-  .grid {
+  .quick {
+    background: var(--ink);
+    color: var(--bg);
+    padding-block: clamp(40px, 5vw, 72px);
+  }
+  .quick__grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
+    gap: clamp(16px, 2.5vw, 40px);
+    margin: 0;
+    padding-block: 0;
+    list-style: none;
   }
-  .card {
-    background: var(--color-canvas);
-    border: 1px solid var(--color-hairline-soft);
-    border-radius: var(--radius-md);
-    padding: 28px 22px;
-    display: block;
+  .quick__item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas: 'photo text' 'photo arrow';
+    align-items: start;
+    gap: 6px 18px;
+    text-decoration: none;
+    height: 100%;
   }
-  .card.accent { background: var(--color-primary-muted); border-color: #ffc8d4; }
-  .icon  { font-size: 32px; margin-bottom: 14px; }
-  .title { font-size: 16px; font-weight: 600; color: var(--color-ink); margin-bottom: 6px; }
-  .sub   { font-size: 14px; color: var(--color-muted); line-height: 1.5; }
-
-  @media (max-width: 768px) { .grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 480px) { .grid { grid-template-columns: 1fr; } }
+  .quick__photo {
+    grid-area: photo;
+    width: clamp(84px, 7vw, 108px);
+    aspect-ratio: 4 / 5;
+    background: var(--surface);
+    transition: transform 0.6s var(--ease);
+  }
+  .quick__photo img {
+    transition: transform 1.2s var(--ease);
+  }
+  .quick__item:hover .quick__photo {
+    transform: translateY(-6px);
+  }
+  .quick__item:hover .quick__photo img {
+    transform: scale(1.08);
+  }
+  .quick__text {
+    grid-area: text;
+    display: grid;
+    gap: 6px;
+    padding-top: 6px;
+  }
+  .quick__title {
+    font-size: var(--step-lead);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.08;
+  }
+  .quick__desc {
+    font-size: var(--step-body);
+    opacity: 0.88;
+    max-width: 24ch;
+  }
+  .quick__arrow {
+    grid-area: arrow;
+    align-self: end;
+    transition: transform 0.4s var(--ease);
+  }
+  .quick__item:hover .quick__arrow {
+    transform: translateX(8px);
+  }
+  @media (max-width: 1100px) {
+    .quick__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 32px 24px;
+    }
+  }
+  @media (max-width: 640px) {
+    .quick__grid {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>
