@@ -1,83 +1,180 @@
 ---
-const stories = [
-  {
-    quote: 'Anak saya operasi appendicitis di RSU Bunda Sehat. Tim dokter dan perawat sabar menjelaskan setiap langkah, anak saya cepat pulih. Pelayanan benar-benar caring.',
-    name: 'Ibu Lina',
-    label: 'Ibu pasien anak, Jakarta Timur',
-    avatar: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=80&q=80',
-  },
-  {
-    quote: 'Sebagai pasien BPJS, antrian dan layanan cukup efisien. Dokter penyakit dalam saya komunikatif, tidak terburu-buru, dan penjelasannya sangat jelas.',
-    name: 'Pak Bambang',
-    label: 'Pensiunan, pasien rawat jalan',
-    avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=80&q=80',
-  },
-  {
-    quote: 'Melahirkan anak pertama di sini. Fasilitas NICU sangat lengkap saat bayi butuh perawatan ekstra. Nurse 24/7 supportive dan selalu memperbarui kondisi bayi.',
-    name: 'Bu Sari',
-    label: 'Ibu baru, pasien Birth Center',
-    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&q=80',
-  },
-  {
-    quote: 'MCU tahunan kami sekeluarga sudah 3 tahun di sini. Hasil cepat keluar, dokter menjelaskan dengan sangat baik, dan follow-up tindakan lanjutannya jelas.',
-    name: 'Keluarga Wijaya',
-    label: 'Pasien MCU tahunan sejak 2021',
-    avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&q=80',
-  },
-] as const;
+import { img } from '../../lib/assets';
+import { stories } from '../../data/content';
 ---
-<section class="section" id="cerita">
-  <div class="container">
-    <h2 class="section-title reveal">Cerita Dari Pasien Kami</h2>
-    <p class="section-sub reveal">Pengalaman nyata keluarga yang mempercayakan kesehatan mereka kepada kami.</p>
+<section class="stories section wrap" aria-labelledby="stories-title" aria-roledescription="carousel">
+  <h2 id="stories-title" class="reveal">Cerita dari pasien kami</h2>
 
-    <div class="grid">
-      {stories.map((s) => (
-        <div class="card reveal">
-          <div class="stars">★★★★★</div>
-          <p class="quote">"{s.quote}"</p>
-          <div class="author">
-            <div
-              class="avatar"
-              style={`background-image: url('${s.avatar}')`}
-              role="img"
-              aria-label={`Foto ${s.name}`}
-            ></div>
-            <div>
-              <div class="name">{s.name}</div>
-              <div class="label">{s.label}</div>
-            </div>
+  <div class="stories__stage" data-stories>
+    {
+      stories.map((s, i) => (
+        <figure class:list={['story', { 'is-on': i === 0 }]} aria-hidden={i === 0 ? 'false' : 'true'} data-i={i}>
+          <div class="story__photo arch">
+            <img src={img(s.photo)} alt={s.alt} width="720" height="960" loading={i === 0 ? 'eager' : 'lazy'} style={`object-position:${s.pos ?? '50% 40%'}`} />
           </div>
-        </div>
-      ))}
-    </div>
+          <div class="story__text">
+            <blockquote class="story__quote lead">
+              <p>“{s.quote}”</p>
+            </blockquote>
+            <figcaption>
+              <strong>{s.name}</strong>, {s.role}
+            </figcaption>
+          </div>
+        </figure>
+      ))
+    }
   </div>
+
+  <div class="stories__nav" role="tablist" aria-label="Pilih cerita">
+    {
+      stories.map((s, i) => (
+        <button type="button" role="tab" class:list={['tab', { 'is-on': i === 0 }]} aria-selected={i === 0 ? 'true' : 'false'} data-to={i}>
+          {s.name}
+        </button>
+      ))
+    }
+  </div>
+  <p class="small muted stories__note">Cerita dibagikan atas persetujuan pasien; sebagian nama disamarkan.</p>
 </section>
 
 <style>
-  .grid {
+  .stories__stage {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    margin-top: clamp(32px, 4vw, 56px);
   }
-  .card {
-    background: var(--color-surface-soft);
-    border: 1px solid var(--color-hairline-soft);
-    border-radius: var(--radius-md);
-    padding: 24px 26px;
+  .story {
+    grid-area: 1 / 1;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: var(--gutter);
+    margin: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 1.2s ease-in-out,
+      visibility 0s 1.2s;
   }
-  .stars { color: var(--color-ink); font-size: 13px; margin-bottom: 12px; letter-spacing: 1px; }
-  .quote { font-size: 15px; color: var(--color-body-text); line-height: 1.7; margin-bottom: 18px; font-style: italic; }
-  .author { display: flex; align-items: center; gap: 12px; }
-  .avatar {
-    width: 40px; height: 40px;
-    border-radius: 50%;
-    background-size: cover; background-position: center;
-    background-color: var(--color-surface-mid);
-    flex-shrink: 0;
+  .story.is-on {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
   }
-  .name  { font-size: 14px; font-weight: 600; color: var(--color-ink); }
-  .label { font-size: 12px; color: var(--color-muted); }
-
-  @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+  .story__photo {
+    grid-column: 2 / 6;
+    aspect-ratio: 3 / 4;
+    max-height: 72svh;
+    width: 100%;
+  }
+  .story__photo img {
+    transform: scale(1.04);
+    transition: transform 8s linear;
+  }
+  .story.is-on .story__photo img {
+    transform: scale(1.1);
+  }
+  .story__text {
+    grid-column: 7 / 13;
+    display: grid;
+    align-content: start;
+    gap: 28px;
+    padding-top: clamp(24px, 8vw, 120px);
+  }
+  .story__quote {
+    margin: 0;
+    max-width: 30ch;
+    font-weight: 400;
+    font-size: var(--step-lead);
+    line-height: 1.22;
+  }
+  .stories__nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: clamp(28px, 3vw, 44px);
+    margin-left: calc((100% - 11 * var(--gutter)) / 12 * 6 + 6 * var(--gutter));
+  }
+  .tab {
+    min-height: 44px;
+    padding: 0.4em 1.2em;
+    border: 0;
+    border-radius: var(--arch-btn);
+    background: var(--surface);
+    color: var(--ink);
+    font: 500 var(--step-body)/1 var(--font);
+    cursor: pointer;
+    transition:
+      background-color 0.25s,
+      color 0.25s,
+      transform 0.3s var(--ease);
+  }
+  .tab:hover {
+    transform: translateY(-2px);
+  }
+  .tab.is-on {
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .stories__note {
+    margin-top: 20px;
+    margin-left: calc((100% - 11 * var(--gutter)) / 12 * 6 + 6 * var(--gutter));
+  }
+  @media (max-width: 860px) {
+    .story {
+      grid-template-columns: 1fr;
+      row-gap: 28px;
+    }
+    .story__photo,
+    .story__text {
+      grid-column: 1;
+    }
+    .story__photo {
+      width: 72%;
+      max-height: 56svh;
+    }
+    .story__text {
+      padding-top: 0;
+    }
+    .stories__nav,
+    .stories__note {
+      margin-left: 0;
+    }
+  }
 </style>
+
+<script>
+  const stage = document.querySelector<HTMLElement>('[data-stories]');
+  if (stage) {
+    const slides = [...stage.querySelectorAll<HTMLElement>('.story')];
+    const tabs = [...document.querySelectorAll<HTMLButtonElement>('.stories__nav .tab')];
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let i = 0;
+    let timer: number | undefined;
+    let paused = false;
+
+    const show = (n: number) => {
+      i = (n + slides.length) % slides.length;
+      slides.forEach((s, k) => {
+        s.classList.toggle('is-on', k === i);
+        s.setAttribute('aria-hidden', String(k !== i));
+      });
+      tabs.forEach((t, k) => {
+        t.classList.toggle('is-on', k === i);
+        t.setAttribute('aria-selected', String(k === i));
+      });
+    };
+    const start = () => {
+      if (reduce || timer) return;
+      timer = window.setInterval(() => !paused && show(i + 1), 8000);
+    };
+    const stop = () => {
+      window.clearInterval(timer);
+      timer = undefined;
+    };
+
+    tabs.forEach((t, k) => t.addEventListener('click', () => show(k)));
+    stage.addEventListener('mouseenter', () => (paused = true));
+    stage.addEventListener('mouseleave', () => (paused = false));
+    document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+    start();
+  }
+</script>
