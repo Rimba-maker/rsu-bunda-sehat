@@ -1,169 +1,147 @@
 ---
-const specializations = [
-  'Penyakit Dalam',
-  'Kandungan & Kebidanan',
-  'Anak',
-  'Bedah Umum',
-  'Jantung & Pembuluh Darah',
-  'Saraf',
-  'Mata',
-  'THT',
-  'Kulit & Kelamin',
-  'Ortopedi',
-  'Urologi',
-  'Paru',
-] as const;
+import { specialties } from '../../data/doctors';
+import { site } from '../../data/site';
 ---
-<section class="booking-section" id="booking">
-  <div class="container">
-    <div class="grid">
-      <!-- Left: copy -->
-      <div class="copy">
-        <h2>Buat Janji Temu<br />Online</h2>
-        <p>
-          Pilih dokter, tanggal, dan jam yang sesuai. Kami akan mengkonfirmasi
-          dalam 1 jam kerja — tanpa perlu datang ke loket.
-        </p>
-        <div class="alts">
-          <div class="alt">
-            <span class="alt-icon">💬</span>
-            <div>
-              <strong>WhatsApp Langsung</strong>
-              <span>0812-3456-7890 — respons cepat</span>
-            </div>
-          </div>
-          <div class="alt">
-            <span class="alt-icon">📞</span>
-            <div>
-              <strong>Telepon Customer Care</strong>
-              <span>(021) 555-1999 — Senin–Sabtu 07.00–20.00</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Right: form -->
-      <div class="form-card">
-        <div class="form-title">Form Janji Temu</div>
-        <form id="bookingForm">
-          <div class="form-grid">
-            <div class="field">
-              <label>Nama Lengkap</label>
-              <input type="text" placeholder="Nama sesuai KTP" required />
-            </div>
-            <div class="field">
-              <label>Tanggal Lahir</label>
-              <input type="date" required />
-            </div>
-            <div class="field">
-              <label>Nomor WhatsApp</label>
-              <input type="tel" placeholder="08xx-xxxx-xxxx" required />
-            </div>
-            <div class="field">
-              <label>Tanggal Preferensi</label>
-              <input type="date" required />
-            </div>
-            <div class="field full">
-              <label>Spesialisasi</label>
-              <select required>
-                <option value="">Pilih spesialisasi...</option>
-                {specializations.map((s) => <option value={s}>{s}</option>)}
-              </select>
-            </div>
-            <div class="field full">
-              <label>Nama Dokter <span class="opt">(Opsional)</span></label>
-              <input type="text" placeholder="Biarkan kosong jika belum ada preferensi" />
-            </div>
-          </div>
-          <button type="submit" class="submit-btn" id="submitBtn">
-            Buat Janji Temu →
-          </button>
-          <p class="note">Konfirmasi dikirim via WhatsApp dalam 1 jam kerja</p>
-        </form>
-      </div>
+<section class="book section wrap" id="janji" aria-labelledby="book-title">
+  <div class="coupon on-ink reveal">
+    <div class="coupon__intro">
+      <h2 id="book-title">Buat janji temu online</h2>
+      <p>Pilih dokter, tanggal, dan jam yang sesuai. Kami konfirmasi dalam 1 jam kerja.</p>
+      <p class="coupon__alt">
+        Lebih suka langsung bicara? <a href={site.whatsappUrl} target="_blank" rel="noopener">Chat WhatsApp</a> atau
+        <a href="tel:+62215551999">telepon customer care</a>.
+      </p>
     </div>
+
+    <form class="coupon__form" id="booking" novalidate>
+      <label class="sr-only" for="b-name">Nama lengkap</label>
+      <input class="field" id="b-name" name="nama" type="text" placeholder="Nama lengkap" autocomplete="name" required />
+
+      <label class="sr-only" for="b-dob">Tanggal lahir atau NIK</label>
+      <input class="field" id="b-dob" name="lahir" type="text" placeholder="Tanggal lahir atau NIK" autocomplete="bday" required />
+
+      <label class="sr-only" for="b-wa">Nomor WhatsApp</label>
+      <input class="field" id="b-wa" name="wa" type="tel" inputmode="tel" placeholder="Nomor WhatsApp" autocomplete="tel" required />
+
+      <label class="sr-only" for="b-spec">Spesialisasi</label>
+      <select class="field" id="b-spec" name="spec" required>
+        <option value="">Pilih spesialisasi</option>
+        {specialties.map((s) => <option value={s.label}>{s.label}</option>)}
+        <option value="Medical Check-Up">Medical Check-Up</option>
+      </select>
+
+      <label class="sr-only" for="b-date">Tanggal pilihan</label>
+      <input class="field" id="b-date" name="tanggal" type="date" aria-label="Tanggal pilihan" required />
+
+      <label class="sr-only" for="b-doc">Dokter pilihan (opsional)</label>
+      <input class="field" id="b-doc" name="dokter" type="text" placeholder="Dokter pilihan (opsional)" />
+
+      <button class="btn coupon__submit" type="submit">Buat janji</button>
+      <p class="coupon__status" id="b-status" role="status" aria-live="polite"></p>
+    </form>
   </div>
 </section>
 
 <style>
-  .booking-section {
-    background: linear-gradient(135deg, #2a1a1f 0%, #180a0d 100%);
-    padding: 64px 0;
+  .coupon {
+    display: grid;
+    grid-template-columns: 5fr 6fr;
+    gap: clamp(32px, 5vw, 80px);
+    padding: clamp(28px, 4vw, 64px);
+    border-radius: var(--r);
+    background: var(--ink);
+    color: var(--bg);
   }
-  .grid {
+  .coupon .btn {
+    --btn-bg: var(--bg);
+    --btn-fg: var(--ink);
+  }
+  .coupon__intro {
+    display: grid;
+    align-content: space-between;
+    gap: 24px;
+  }
+  .coupon__intro h2 {
+    font-size: var(--step-head);
+    max-width: 11ch;
+  }
+  .coupon__intro p {
+    max-width: 38ch;
+  }
+  .coupon__alt a {
+    text-underline-offset: 0.25em;
+    text-decoration-thickness: 2px;
+  }
+  .coupon__form {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 64px;
-    align-items: center;
+    gap: 10px;
   }
-
-  /* Copy */
-  .copy h2 { font-size: 32px; font-weight: 700; color: #fff; line-height: 1.25; margin-bottom: 14px; }
-  .copy p  { font-size: 15px; color: rgba(255,255,255,.65); line-height: 1.7; margin-bottom: 28px; }
-  .alts    { display: flex; flex-direction: column; gap: 14px; }
-  .alt     { display: flex; align-items: flex-start; gap: 12px; color: rgba(255,255,255,.7); font-size: 14px; }
-  .alt-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
-  .alt strong { display: block; color: #fff; font-weight: 600; margin-bottom: 2px; }
-
-  /* Form card */
-  .form-card {
-    background: var(--color-canvas);
-    border-radius: var(--radius-lg);
-    padding: 32px;
+  .coupon__form .field {
+    background: var(--bg-hi);
   }
-  .form-title { font-size: 18px; font-weight: 700; color: var(--color-ink); margin-bottom: 22px; }
-  .form-grid  { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
-
-  .field { display: flex; flex-direction: column; gap: 5px; }
-  .field.full { grid-column: span 2; }
-  label  { font-size: 12px; font-weight: 600; color: var(--color-ink); }
-  .opt   { font-weight: 400; color: var(--color-muted); }
-
-  input, select {
-    height: 44px;
-    border: 1px solid var(--color-hairline);
-    border-radius: var(--radius-sm);
-    padding: 0 12px;
-    font-family: var(--font-sans);
-    font-size: 14px;
-    color: var(--color-ink);
-    background: var(--color-canvas);
-    outline: none;
-    transition: border-color .15s;
-    width: 100%;
+  .coupon__form .field:first-of-type,
+  .coupon__form input[name='dokter'],
+  .coupon__submit,
+  .coupon__status {
+    grid-column: 1 / -1;
   }
-  input:focus, select:focus { border-color: var(--color-ink); border-width: 2px; }
-
-  .submit-btn {
-    width: 100%;
-    height: 48px;
-    background: var(--color-primary);
-    color: #fff;
-    border: none;
-    border-radius: var(--radius-sm);
-    font-family: var(--font-sans);
-    font-size: 15px;
+  .coupon__submit {
+    min-height: 58px;
+    margin-top: 4px;
+  }
+  .coupon__status {
+    min-height: 1.4em;
     font-weight: 500;
-    cursor: pointer;
-    transition: background .15s;
-    margin-bottom: 8px;
   }
-  .submit-btn:hover { background: var(--color-primary-hover); }
-  .note { font-size: 12px; color: var(--color-muted); text-align: center; }
-
-  @media (max-width: 768px) {
-    .grid      { grid-template-columns: 1fr; gap: 40px; }
-    .form-grid { grid-template-columns: 1fr; }
-    .field.full{ grid-column: span 1; }
+  @media (max-width: 860px) {
+    .coupon {
+      grid-template-columns: 1fr;
+    }
+    .coupon__form {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
 
 <script>
-  document.getElementById('bookingForm')?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const btn = document.getElementById('submitBtn') as HTMLButtonElement;
-    btn.textContent = '✅ Janji terkirim — kami akan konfirmasi segera';
-    btn.style.background = '#22c55e';
-    btn.disabled = true;
-  });
+  /* No backend yet: the coupon opens WhatsApp with the message already written. */
+  const form = document.getElementById('booking') as HTMLFormElement | null;
+  const status = document.getElementById('b-status');
+  if (form && status) {
+    const set = (id: string, v?: string) => {
+      const el = document.getElementById(id) as HTMLInputElement | HTMLSelectElement | null;
+      if (el && v) el.value = v;
+    };
+
+    window.addEventListener('booking:set', (e) => {
+      const { doctor, spec, note } = (e as CustomEvent).detail as { doctor?: string; spec?: string; note?: string };
+      set('b-spec', spec);
+      set('b-doc', doctor ?? note);
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!form.checkValidity()) {
+        status.textContent = 'Mohon lengkapi data bertanda wajib terlebih dahulu.';
+        form.reportValidity();
+        return;
+      }
+      const d = new FormData(form);
+      const msg = [
+        'Halo RSU Bunda Sehat, saya ingin membuat janji temu.',
+        `Nama: ${d.get('nama')}`,
+        `Tgl lahir/NIK: ${d.get('lahir')}`,
+        `WhatsApp: ${d.get('wa')}`,
+        `Spesialisasi: ${d.get('spec')}`,
+        d.get('dokter') ? `Dokter/paket: ${d.get('dokter')}` : '',
+        `Tanggal pilihan: ${d.get('tanggal')}`,
+      ]
+        .filter(Boolean)
+        .join('\n');
+      window.open(`https://wa.me/6281234567890?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
+      status.textContent = 'Terima kasih. WhatsApp akan terbuka dengan pesan yang sudah kami tuliskan, tinggal kirim.';
+      form.reset();
+    });
+  }
 </script>
