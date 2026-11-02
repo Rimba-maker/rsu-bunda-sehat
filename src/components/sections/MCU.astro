@@ -1,113 +1,299 @@
 ---
-import { mcuPackages, mcuSpecials } from '../../data/mcu';
+import { mcuPlans, mcuSpecials } from '../../data/mcu';
 ---
-<section class="section" id="mcu">
-  <div class="container">
-    <h2 class="section-title reveal">Paket Medical Check-Up</h2>
-    <p class="section-sub reveal">Deteksi dini, pencegahan terbaik. Pilih paket sesuai kebutuhan.</p>
-
-    <!-- Main packages -->
-    <div class="pkg-grid">
-      {mcuPackages.map((p) => (
-        <div class:list={['pkg-card card-hover reveal', p.popular && 'popular']}>
-          {p.popular && <span class="popular-badge">⭐ Paling Populer</span>}
-          <div class="icon">{p.icon}</div>
-          <div class="name">{p.name}</div>
-          <div class="price">{p.price}</div>
-          <div class="target">{p.target}</div>
-          <ul class="items">
-            {p.items.map((item) => <li>{item}</li>)}
-          </ul>
-          <a href="#booking" class="btn-primary" style="display:block; text-align:center; margin-top:auto;">
-            Pesan Paket
-          </a>
-        </div>
-      ))}
+<section class="mcu" id="mcu" aria-labelledby="mcu-title">
+  <div class="wrap mcu__head section">
+    <div>
+      <h2 id="mcu-title" class="reveal">Paket medical check-up</h2>
+      <p class="mcu__sub reveal" style="--i:1">Deteksi dini adalah pencegahan terbaik. Geser usia Anda, kami tunjukkan paket yang paling pas.</p>
     </div>
 
-    <!-- Special packages -->
-    <div class="special-grid">
-      {mcuSpecials.map((s) => (
-        <div class="special-card reveal">
-          <span class="s-icon">{s.icon}</span>
-          <div>
-            <div class="s-name">{s.name}</div>
-            <div class="s-price">{s.price}</div>
+    <div class="age reveal" style="--i:2">
+      <label for="age" class="age__label">Usia Anda: <output id="age-out" for="age">40</output> tahun</label>
+      <input id="age" type="range" min="18" max="80" value="40" step="1" />
+      <p class="age__reco" id="age-reco" aria-live="polite">Kami sarankan paket <strong>Premium</strong>.</p>
+    </div>
+  </div>
+
+  <div class="fields" id="mcu-fields">
+    {
+      mcuPlans.map((p, i) => (
+        <article class:list={['field-plan', `field-plan--${p.id}`]} data-plan={p.id} data-min={p.age[0]} data-max={p.age[1]}>
+          <div class="fp__top">
+            <h3 class="fp__name reveal">{p.name}</h3>
+            <p class="fp__who reveal" style="--i:1">{p.who}</p>
+            <p class="fp__reco" aria-hidden="true">Disarankan untuk usia Anda</p>
           </div>
-        </div>
-      ))}
-    </div>
+          <p class="fp__inc reveal" style="--i:2">{p.includes}</p>
+          <div class="fp__bottom reveal" style="--i:3">
+            <p class="fp__price">
+              <span>{p.price}</span>
+              <span class="small">{p.priceNote}</span>
+            </p>
+            <a class="btn fp__btn" href="#janji" data-paket={p.name}>Pilih {p.name}</a>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+
+  <div class="wrap mcu__special section">
+    <h3 class="reveal mcu__special-title">Paket khusus</h3>
+    <ul>
+      {
+        mcuSpecials.map((s, i) => (
+          <li class="reveal" style={`--i:${i}`}>
+            <p class="mcu__sname">{s.name}</p>
+            <p class="mcu__sprice">{s.price}</p>
+            <p class="muted">{s.note}</p>
+          </li>
+        ))
+      }
+    </ul>
   </div>
 </section>
 
 <style>
-  .pkg-grid {
+  .mcu__head {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin-bottom: 28px;
+    grid-template-columns: 1fr minmax(280px, 460px);
+    gap: 32px clamp(32px, 6vw, 96px);
+    align-items: end;
+    padding-bottom: clamp(32px, 4vw, 56px);
   }
-  .pkg-card {
-    background: var(--color-canvas);
-    border: 1px solid var(--color-hairline);
-    border-radius: var(--radius-md);
-    padding: 28px 24px;
-    display: flex;
-    flex-direction: column;
-    position: relative;
+  .mcu__sub {
+    margin-top: 16px;
+    max-width: 44ch;
   }
-  .pkg-card.popular {
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 2px rgba(255,56,92,.12);
-  }
-  .popular-badge {
-    position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
-    background: var(--color-primary); color: #fff;
-    font-size: 11px; font-weight: 600;
-    padding: 4px 16px;
-    border-radius: 9999px;
-    white-space: nowrap;
-  }
-  .icon   { font-size: 28px; margin-bottom: 12px; }
-  .name   { font-size: 18px; font-weight: 700; color: var(--color-ink); margin-bottom: 4px; }
-  .price  { font-size: 22px; font-weight: 700; color: var(--color-primary); margin-bottom: 4px; }
-  .target {
-    font-size: 13px; color: var(--color-muted); font-style: italic;
-    margin-bottom: 16px;
-    padding-bottom: 14px;
-    border-bottom: 1px solid var(--color-hairline-soft);
-  }
-  .items  { list-style: none; display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; flex: 1; }
-  .items li {
-    font-size: 14px; color: var(--color-body-text);
-    padding-left: 20px;
-    position: relative;
-  }
-  .items li::before {
-    content: '✓';
-    color: var(--color-primary);
-    font-weight: 700;
-    position: absolute; left: 0;
-  }
-
-  .special-grid {
+  .age {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
     gap: 14px;
+    padding: 24px;
+    border-radius: var(--r);
+    background: var(--surface);
   }
-  .special-card {
-    background: var(--color-canvas);
-    border: 1px solid var(--color-hairline-soft);
-    border-radius: var(--radius-md);
-    padding: 18px 20px;
-    display: flex; gap: 14px; align-items: flex-start;
+  .age__label {
+    font-weight: 600;
+    font-size: var(--step-body);
   }
-  .s-icon  { font-size: 24px; flex-shrink: 0; }
-  .s-name  { font-size: 14px; font-weight: 600; color: var(--color-ink); margin-bottom: 3px; }
-  .s-price { font-size: 13px; color: var(--color-muted); }
+  .age__reco {
+    min-height: 1.5em;
+  }
+  .age input[type='range'] {
+    width: 100%;
+    height: 32px;
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    cursor: pointer;
+  }
+  .age input[type='range']::-webkit-slider-runnable-track {
+    height: 10px;
+    border-radius: 999px;
+    background: var(--bg-hi);
+  }
+  .age input[type='range']::-moz-range-track {
+    height: 10px;
+    border-radius: 999px;
+    background: var(--bg-hi);
+  }
+  .age input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 28px;
+    height: 34px;
+    margin-top: -12px;
+    border-radius: 999px 999px 4px 4px;
+    background: var(--ink);
+    border: 0;
+  }
+  .age input[type='range']::-moz-range-thumb {
+    width: 28px;
+    height: 34px;
+    border-radius: 999px 999px 4px 4px;
+    background: var(--ink);
+    border: 0;
+  }
 
-  @media (max-width: 768px) {
-    .pkg-grid    { grid-template-columns: 1fr; }
-    .special-grid{ grid-template-columns: 1fr; }
+  /* Three flat fields that meet at hard vertical edges, bleeding to the viewport. */
+  .fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .field-plan {
+    position: relative;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 28px;
+    min-height: min(760px, 88svh);
+    padding: clamp(24px, 3vw, 48px);
+    transition: transform 0.6s var(--ease);
+  }
+  .field-plan--basic {
+    background: var(--bg-hi);
+    color: var(--ink);
+  }
+  .field-plan--premium {
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .field-plan--premium .fp__btn {
+    --btn-bg: var(--bg);
+    --btn-fg: var(--ink);
+  }
+  .field-plan--executive {
+    background: var(--surface);
+    color: var(--ink);
+  }
+  .fp__top {
+    display: grid;
+    gap: 14px;
+    align-content: start;
+  }
+  .fp__name {
+    font-size: var(--step-head);
+    letter-spacing: -0.04em;
+  }
+  .fp__who {
+    max-width: 26ch;
+    font-size: var(--step-body);
+    line-height: 1.3;
+  }
+  .fp__reco {
+    justify-self: start;
+    display: none;
+    align-items: center;
+    gap: 8px;
+    padding: 0.35em 1em 0.35em 0.8em;
+    border-radius: var(--arch-btn);
+    font-size: var(--step-small);
+    font-weight: 600;
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .field-plan--premium .fp__reco {
+    background: var(--bg);
+    color: var(--ink);
+  }
+  .field-plan.is-reco .fp__reco {
+    display: inline-flex;
+  }
+  .fp__inc {
+    align-self: start;
+    max-width: 40ch;
+    font-size: var(--step-body);
+  }
+  .fp__bottom {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .fp__price {
+    display: grid;
+    line-height: 1;
+  }
+  .fp__price > span:first-child {
+    font-size: var(--step-head);
+    font-weight: 500;
+    letter-spacing: -0.04em;
+  }
+  .fp__price .small {
+    margin-top: 8px;
+  }
+  .field-plan.is-reco {
+    transform: translateY(-10px);
+  }
+
+  .mcu__special {
+    display: grid;
+    gap: 28px;
+  }
+  .mcu__special-title {
+    font-size: var(--step-lead);
+  }
+  .mcu__special ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .mcu__special li {
+    display: grid;
+    gap: 6px;
+    align-content: start;
+    padding-left: 28px;
+    position: relative;
+  }
+  .mcu__special li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.3em;
+    width: 14px;
+    height: 20px;
+    border-radius: 999px 999px 0 0;
+    background: var(--ink);
+  }
+  .mcu__sname {
+    font-size: var(--step-body);
+    font-weight: 600;
+  }
+  .mcu__sprice {
+    font-size: var(--step-body);
+    font-weight: 500;
+  }
+
+  @media (max-width: 960px) {
+    .mcu__head {
+      grid-template-columns: 1fr;
+    }
+    .fields {
+      grid-template-columns: 1fr;
+    }
+    .field-plan {
+      min-height: 0;
+      gap: 24px;
+    }
+    .field-plan.is-reco {
+      transform: none;
+    }
+  }
+  @media (max-width: 640px) {
+    .mcu__special ul {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
+
+<script>
+  /* A small live thing: age in, recommended package out. */
+  const range = document.getElementById('age') as HTMLInputElement | null;
+  if (range) {
+    const out = document.getElementById('age-out')!;
+    const reco = document.getElementById('age-reco')!;
+    const plans = [...document.querySelectorAll<HTMLElement>('.field-plan')];
+    const names: Record<string, string> = { basic: 'Basic', premium: 'Premium', executive: 'Executive' };
+    const update = () => {
+      const age = Number(range.value);
+      out.textContent = String(age);
+      let id = 'premium';
+      plans.forEach((p) => {
+        const hit = age >= Number(p.dataset.min) && age <= Number(p.dataset.max);
+        p.classList.toggle('is-reco', hit);
+        if (hit) id = p.dataset.plan!;
+      });
+      reco.innerHTML = `Untuk usia ${age}, kami sarankan paket <strong>${names[id]}</strong>.`;
+    };
+    range.addEventListener('input', update);
+    update();
+
+    document.querySelectorAll<HTMLElement>('[data-paket]').forEach((b) =>
+      b.addEventListener('click', () =>
+        window.dispatchEvent(new CustomEvent('booking:set', { detail: { spec: 'Medical Check-Up', note: `Paket ${b.dataset.paket}` } })),
+      ),
+    );
+  }
+</script>
